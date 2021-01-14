@@ -1,0 +1,18 @@
+<a [routerLink]="['/products', product.id]">
+  <img class="card-img-top" [src]="product.mainPhoto">
+</a>
+<div class="card-body">
+  <h5 class="card-title">
+    <a [routerLink]="['/products', product.id]">{{product.title}}</a>
+  </h5>
+  <p class="card-text" [innerText]="product.description">{{product.description}}</p>
+</div>
+<div class="card-footer bg-transparent text-muted">
+  <div class="row">
+    <div class="col">{{product.category.name}}</div>
+    <div class="col-auto text-right">{{product.price | currency:'EUR'}}</div>
+    <div class="col-auto">
+      <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct()"><i class="fas fa-trash-alt"></i></button>
+    </div>
+  </div>
+</div>
