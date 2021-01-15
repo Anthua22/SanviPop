@@ -15,6 +15,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
   @Output() add = new EventEmitter<Product>();
   newProduct!: ProductAdd;
   photoFile = '';
+  emailconfirmation!:string;
   categories: Category[] = [];
   saved = false;
 

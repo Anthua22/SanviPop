@@ -8,7 +8,12 @@ const routes: Route[] = [
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   { path: '', pathMatch: 'full', redirectTo: 'products' },
-  { path: '**', redirectTo: 'products' }
+
+  {
+    path:'auth',
+    loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  },
+  { path: '**', redirectTo: 'products' },
 ];
 
 @NgModule({
