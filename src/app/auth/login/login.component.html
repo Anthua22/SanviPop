@@ -1,15 +1,65 @@
 <div class="container">
-  <form action="#" id="form-login" class="mt-4" method="POST" role="form">
+  <form
+    action="#"
+    (ngSubmit)="login()"
+    id="form-login"
+    class="mt-4"
+    method="POST"
+    role="form"
+    #prodForm="ngForm"
+
+  >
     <legend>Welcome to FoodScore!</legend>
 
     <div class="form-group">
       <label for="correo">Email:</label>
-      <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        placeholder="Email"
+        [(ngModel)]="user.email"
+        #nombreModel="ngModel"
+        [ngClass]="{
+          'is-valid': nombreModel.touched && nombreModel.valid,
+          'is-invalid': nombreModel.touched && nombreModel.invalid
+        }"
+        required
+      />
+      <div
+      class="invalid-feedback"
+      *ngIf="nombreModel.errors && nombreModel.errors.required"
+    >
+      Email is required
+    </div>
       <label for="password">Password:</label>
-      <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password"
+        [(ngModel)]="user.password"
+        placeholder="Password"
+        #passModel="ngModel"
+        [ngClass]="{
+          'is-valid': passModel.touched && passModel.valid,
+          'is-invalid': passModel.touched && passModel.invalid
+        }"
+        required
+      />
+
+      <div
+        class="invalid-feedback"
+        *ngIf="passModel.errors && passModel.errors.required"
+      >
+        Password is required
+      </div>
     </div>
     <p class="text-danger" id="errorInfo"></p>
-    <a class="btn btn-secondary" href="/register.html" role="button">Create account</a>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <a class="btn btn-secondary" href="/register.html" role="button"
+      >Create account</a
+    >
+    <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">Login</button>
   </form>
 </div>

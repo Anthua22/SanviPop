@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/users/interfaces/user';
-import { UserResponse } from '../responses/user-response';
+import { TokenResponse, UserResponse } from '../responses/user-response';
+
 
 
 @Injectable({
@@ -15,5 +16,9 @@ export class AuthService {
 
   register(user:User): Observable<string>{
     return this.http.post<UserResponse>('auth/register',user).pipe(map(resp=>resp.email));
+  }
+
+  login(user:User):Observable<string>{
+    return this.http.post<TokenResponse>('auth/login',user).pipe(map(x=>x.accessToken));
   }
 }
