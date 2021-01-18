@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginactivateguardGuard } from '../guards/loginactivateguard.guard';
 import { NumericIdGuard } from '../guards/numeric-id.guard';
 import { PageLeaveGuard } from '../guards/page-leave.guard';
 import { ProductResolver } from '../resolvers/product.resolver';

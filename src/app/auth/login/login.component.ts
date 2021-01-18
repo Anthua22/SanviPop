@@ -11,7 +11,7 @@ import { GeolocalitationService } from '../services/geolocalitation.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Output() add = new EventEmitter<User>();
+
   user!: User;
   constructor(private geolocation: GeolocalitationService, private router: Router, private authService: AuthService) { }
 

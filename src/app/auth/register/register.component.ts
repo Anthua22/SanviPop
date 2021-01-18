@@ -37,6 +37,8 @@ export class RegisterComponent implements OnInit {
       this.newUser.lat=x.latitude;
       this.newUser.lng=x.longitude;
     });
+
+
   }
 
 
