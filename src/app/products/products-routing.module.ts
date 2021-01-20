@@ -11,12 +11,13 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: ProductsPageComponent
+    component: ProductsPageComponent,
+    canDeactivate: [PageLeaveGuard]
   },
   {
     path: 'add',
     component: ProductFormComponent,
-    canDeactivate: [PageLeaveGuard]
+
   },
   {
     path: ':id',

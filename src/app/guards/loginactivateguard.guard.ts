@@ -9,15 +9,10 @@ import { AuthService } from '../auth/services/auth.service';
 export class LoginactivateguardGuard implements CanActivate {
 
   constructor(private router: Router, private authService:AuthService) { }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+      return this.authService.isLooged().pipe();
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean | UrlTree {
-    let token = localStorage.getItem('token');
-    if(token){
-      return true;
-    }
-    return this.router.createUrlTree(['/auth/login']);
   }
+
 
 }

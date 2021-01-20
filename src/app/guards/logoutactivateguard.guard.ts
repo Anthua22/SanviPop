@@ -12,6 +12,7 @@ export class LogoutactivateguardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree {
     let token = localStorage.getItem('token');
+
     if (!token) {
       return true;
     }
