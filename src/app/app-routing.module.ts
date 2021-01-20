@@ -10,14 +10,14 @@ const routes: Route[] = [
     canActivate:[LoginactivateguardGuard],
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
-  { path: '',canActivate:[LoginactivateguardGuard], pathMatch: 'full', redirectTo: 'products' },
+  { path: '',pathMatch: 'full', redirectTo: 'auth/login' },
 
   {
     path:'auth',
     canActivate:[LogoutactivateguardGuard],
     loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
   },
-  { path: '**', redirectTo: 'auth/login' },
+  { path: '**', redirectTo: 'products' },
 ];
 
 @NgModule({

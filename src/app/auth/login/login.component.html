@@ -57,7 +57,7 @@
       </div>
     </div>
     <p class="text-danger" id="errorInfo"></p>
-    <a class="btn btn-secondary" href="/register.html" role="button"
+    <a class="btn btn-secondary" [routerLink]="['/auth/register']" role="button"
       >Create account</a
     >
     <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">Login</button>

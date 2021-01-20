@@ -11,8 +11,7 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: ProductsPageComponent,
-    canDeactivate: [PageLeaveGuard]
+    component: ProductsPageComponent
   },
   {
     path: 'add',
