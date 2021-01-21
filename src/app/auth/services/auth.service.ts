@@ -19,10 +19,12 @@ export class AuthService {
       .pipe(map((resp) => resp.email));
   }
 
-  login(user: User): Observable<string> {
+  login(user: User): Observable<void> {
     return this.http
       .post<TokenResponse>('auth/login', user)
-      .pipe(map((x) => x.accessToken));
+      .pipe(map((x) => { localStorage.setItem('token', x.accessToken);
+      this.logged=true;
+    }));
   }
 
   isLooged(): Observable<boolean> {

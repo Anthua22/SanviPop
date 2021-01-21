@@ -14,18 +14,17 @@ import { UserService } from 'src/app/users/services/user.service';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
+
+
   @Output() deleted = new EventEmitter<void>();
   owner!:User;
 
-  constructor(private productsService: ProductsService, private userService:UserService) { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
 
     this.product.datePublished =  moment(this.product.datePublished).startOf('hour').fromNow();
-    this.userService.getProfile(this.product.owner?.id).subscribe(x=>{
-      this.owner = x
-      console.log(this.owner)
-    })
+    this.owner = this.product.owner!;
   }
 
   deleteProduct(): void {

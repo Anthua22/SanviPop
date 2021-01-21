@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../interfaces/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'sp-profile',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor() { }
+  user!:User;
+  constructor(private router:Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(
+      x=>this.user = x.user
+    );
   }
 
 }
