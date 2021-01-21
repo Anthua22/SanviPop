@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/users/interfaces/user';
 import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
 
@@ -10,10 +12,12 @@ import { ProductsService } from '../services/products.service';
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
   @Output() deleted = new EventEmitter<void>();
+  @Input() owner!:User;
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService, private authService:AuthService) { }
 
   ngOnInit(): void {
+  //  this.authService.
   }
 
   deleteProduct(): void {
