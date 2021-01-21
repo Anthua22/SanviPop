@@ -10,12 +10,17 @@ const routes: Route[] = [
     canActivate:[LoginactivateguardGuard],
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
-  { path: '',pathMatch: 'full', redirectTo: 'auth/login' },
+  { path: '',pathMatch: 'full', redirectTo: 'products' },
 
   {
     path:'auth',
     canActivate:[LogoutactivateguardGuard],
     loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  },
+  {
+    path:'users',
+    canActivate:[LoginactivateguardGuard],
+    loadChildren:()=>import('./users/users.module').then(u=>u.UsersModule)
   },
   { path: '**', redirectTo: 'products' },
 ];

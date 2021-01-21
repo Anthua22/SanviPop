@@ -1,0 +1,23 @@
+
+.card > .card-footer {
+  font-size: smaller;
+}
+
+.card-body .card-text {
+  white-space: pre-wrap;
+}
+
+.card-footer .avatar img {
+  width: 40px;
+  cursor: pointer;
+}
+
+.card-footer .name {
+  color: #385898;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card-footer .name:hover {
+  text-decoration: underline;
+}

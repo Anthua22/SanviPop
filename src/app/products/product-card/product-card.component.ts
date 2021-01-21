@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
+
 import { User } from 'src/app/users/interfaces/user';
 import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
+import * as moment from 'moment';
+import { UserService } from 'src/app/users/services/user.service';
 
 @Component({
   selector: 'sp-product-card',
@@ -12,12 +15,17 @@ import { ProductsService } from '../services/products.service';
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
   @Output() deleted = new EventEmitter<void>();
-  @Input() owner!:User;
+  owner!:User;
 
-  constructor(private productsService: ProductsService, private authService:AuthService) { }
+  constructor(private productsService: ProductsService, private userService:UserService) { }
 
   ngOnInit(): void {
-  //  this.authService.
+
+    this.product.datePublished =  moment(this.product.datePublished).startOf('hour').fromNow();
+    this.userService.getProfile(this.product.owner?.id).subscribe(x=>{
+      this.owner = x
+      console.log(this.owner)
+    })
   }
 
   deleteProduct(): void {

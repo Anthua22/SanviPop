@@ -1,29 +1,29 @@
-<a [routerLink]="['/products',product.id]"><img class="card-img-top" [src]="product.photos"></a>
+<a [routerLink]="['/products',product.id]"><img class="card-img-top" [src]="product.mainPhoto"></a>
 <div class="card-body">
     <h5 class="card-title"><a [routerLink]="['/products',product.id]" [innerText]="product.title"></a></h5>
     <p class="card-text">{{product.description}}</p>
     <div class="row text-muted">
-        <div class="col-auto">cantegory-name</div>
+        <div class="col-auto">{{product.category.name}}</div>
         <div class="col text-muted text-right">
-            {{product.price}} €
+          {{product.price | currency:'EUR'}}
         </div>
     </div>
 </div>
-<!--
+
 <div class="card-footer bg-transparent">
     <div class="row">
         <div class="col-auto avatar pl-1 pr-1">
-            <a [routerLink]="['/profile',product.id]">
-                <img src="{{owner.photo}}" class="rounded-circle">
+            <a [routerLink]="['/users',owner.id]">
+                <img [src]="owner.photo" class="rounded-circle">
             </a>
         </div>
         <div class="col">
             <div class="name">
-                <a href="profile.html?id={{owner.id}}">
+                <a [routerLink]="['/users',owner.id]">
                     {{owner.name}}
                 </a>
             </div>
-            <div><small class="text-muted">{{datePublished}}</small></div>
+            <div><small class="text-muted">{{product.datePublished}}</small></div>
         </div>
 
         <div class="col-auto" *ngIf="product.mine">
@@ -40,24 +40,5 @@
         </div>
     </div>
 </div>
--->
 
 
-<a [routerLink]="['/products', product.id]">
-  <img class="card-img-top" [src]="product.mainPhoto">
-</a>
-<div class="card-body">
-  <h5 class="card-title">
-    <a [routerLink]="['/products', product.id]">{{product.title}}</a>
-  </h5>
-  <p class="card-text" [innerText]="product.description">{{product.description}}</p>
-</div>
-<div class="card-footer bg-transparent text-muted">
-  <div class="row">
-    <div class="col">{{product.category.name}}</div>
-    <div class="col-auto text-right">{{product.price | currency:'EUR'}}</div>
-    <div class="col-auto">
-      <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct()"><i class="fas fa-trash-alt"></i></button>
-    </div>
-  </div>
-</div>
