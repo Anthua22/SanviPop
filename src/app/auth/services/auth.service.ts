@@ -30,18 +30,18 @@ export class AuthService {
   isLooged(): Observable<boolean> {
     let token: string | null = localStorage.getItem('token');
     if (token) {
-      this.http.get('auth/register').pipe(
+      return this.http.get('auth/validate').pipe(
         map((x) => {
           this.logged = true;
-          return false;
-        })
-      ),
+          return true;
+        }),
+
         catchError((err, caught) => {
           this.logged = false;
           return of(false);
-        });
+        }))
 
-      return of(true);
+
     } else {
       return of(false);
     }
