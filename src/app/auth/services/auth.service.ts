@@ -46,4 +46,12 @@ export class AuthService {
       return of(false);
     }
   }
+
+  loginGoogle(token:string){
+    return this.http
+      .post<TokenResponse>('auth/google', {token:token})
+      .pipe(map((x) => { localStorage.setItem('token', x.accessToken);
+      this.logged=true;
+    }));
+  }
 }

@@ -6,8 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidatorsModule } from '../validators/validators.module';
 import { LoginComponent } from './login/login.component';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GoogleLoginModule } from '../google-login/google-login.module';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -16,7 +16,9 @@ import { LoginComponent } from './login/login.component';
     AuthRoutingModule,
     ReactiveFormsModule,
     ValidatorsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
+    GoogleLoginModule
   ]
 })
 export class AuthModule { }

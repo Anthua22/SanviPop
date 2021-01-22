@@ -7,7 +7,6 @@
     method="POST"
     role="form"
     #prodForm="ngForm"
-
   >
     <legend>Welcome to FoodScore!</legend>
 
@@ -28,11 +27,11 @@
         required
       />
       <div
-      class="invalid-feedback"
-      *ngIf="nombreModel.errors && nombreModel.errors.required"
-    >
-      Email is required
-    </div>
+        class="invalid-feedback"
+        *ngIf="nombreModel.errors && nombreModel.errors.required"
+      >
+        Email is required
+      </div>
       <label for="password">Password:</label>
       <input
         type="password"
@@ -60,6 +59,26 @@
     <a class="btn btn-secondary" [routerLink]="['/auth/register']" role="button"
       >Create account</a
     >
-    <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">Login</button>
+    <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">
+      Login
+    </button>
+    <button
+      spGoogleLogin
+      type="button"
+      class="btn btn-danger"
+      (loginOk)="loggedGoogle($event)"
+    >
+      <fa-icon [icon]="['fab', 'google']"></fa-icon>
+      Google Login
+    </button>
+    <button
+
+      type="button"
+      class="btn btn-danger"
+      (loginOk)="loggedGoogle($event)"
+    >
+      <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+      Facebook Login
+    </button>
   </form>
 </div>
