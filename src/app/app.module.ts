@@ -12,6 +12,7 @@ import { MenuModule } from './menu/menu.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleLoginModule } from './google-login/google-login.module';
 import { FacebookLoginModule } from './facebook-login/facebook-login.module';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,13 @@ import { FacebookLoginModule } from './facebook-login/facebook-login.module';
     AppRoutingModule,
     MenuModule,
     FontAwesomeModule,
-    GoogleLoginModule.forRoot('642525211226-drg3bbbvsj638oso0ahgpoug4ti7i0q7.apps.googleusercontent.com'),
+    GoogleLoginModule.forRoot('667204529710-2b9jd5idoqepfe6ahpq3qo9kvtkmpdcb.apps.googleusercontent.com'),
     FacebookLoginModule.forRoot({
       app_id:'401208517850489',
       version:'v9.0'
+    }),
+    NgxMapboxGLModule.withConfig({
+      accessToken:'pk.eyJ1IjoiYW50aG9ueXViaSIsImEiOiJja2dtODlnMjAwYWQ2MnRqbzNlY29ib282In0.wi12UKThrEvuKZ5nWCxq8g'
     })
   ],
   providers: [

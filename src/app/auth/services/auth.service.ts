@@ -11,7 +11,7 @@ import { TokenResponse, EmailResponse } from '../responses/user-response';
 export class AuthService {
   logged: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(user: User): Observable<string> {
     return this.http
@@ -22,9 +22,10 @@ export class AuthService {
   login(user: User): Observable<void> {
     return this.http
       .post<TokenResponse>('auth/login', user)
-      .pipe(map((x) => { localStorage.setItem('token', x.accessToken);
-      this.logged=true;
-    }));
+      .pipe(map((x) => {
+        localStorage.setItem('token', x.accessToken);
+        this.logged = true;
+      }));
   }
 
   isLooged(): Observable<boolean> {
@@ -47,11 +48,25 @@ export class AuthService {
     }
   }
 
-  loginGoogle(token:string){
+  loginGoogle(token: string) {
     return this.http
-      .post<TokenResponse>('auth/google', {token:token})
-      .pipe(map((x) => { localStorage.setItem('token', x.accessToken);
-      this.logged=true;
-    }));
+      .post<TokenResponse>('auth/google', { token: token })
+      .pipe(map((x) => {
+        localStorage.setItem('token', x.accessToken);
+        this.logged = true;
+      }));
   }
+
+
+  loginFacebook(token: string): Observable<string> {
+    console.log(token);
+    return this.http
+      .post<TokenResponse>('auth/facebook', { token: token })
+      .pipe(map((x) => {
+        this.logged = true;
+        localStorage.setItem('token', x.accessToken);
+        return x.accessToken;
+      }));
+  }
+
 }

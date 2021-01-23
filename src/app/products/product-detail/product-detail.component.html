@@ -1,4 +1,17 @@
-<sp-product-card class="card mt-4 shadow" [product]="product" (deleted)="goBack()"></sp-product-card>
+<sp-product-card
+  class="card mt-4 shadow"
+  [product]="product"
+  (deleted)="goBack()"
+></sp-product-card>
+<mgl-map
+  [style]="'mapbox://styles/mapbox/streets-v11'"
+  [zoom]="[17]"
+  [center]="[product.owner!.lng!, product.owner!.lat!]"
+>
+  <mgl-marker
+    [lngLat]="[product.owner!.lng!, product.owner!.lat!]"
+  ></mgl-marker>
+</mgl-map>
 <div class="mt-4 mb-4">
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>

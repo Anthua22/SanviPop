@@ -8,6 +8,7 @@ import { ValidatorsModule } from '../validators/validators.module';
 import { LoginComponent } from './login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleLoginModule } from '../google-login/google-login.module';
+import { FacebookLoginModule } from '../facebook-login/facebook-login.module';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -18,7 +19,8 @@ import { GoogleLoginModule } from '../google-login/google-login.module';
     ValidatorsModule,
     FormsModule,
     FontAwesomeModule,
-    GoogleLoginModule
+    GoogleLoginModule,
+    FacebookLoginModule
   ]
 })
 export class AuthModule { }

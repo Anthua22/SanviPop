@@ -1,7 +1,7 @@
 <div class="container">
   <form
     action="#"
-    (ngSubmit)="login()"
+
     id="form-login"
     class="mt-4"
     method="POST"
@@ -59,9 +59,20 @@
     <a class="btn btn-secondary" [routerLink]="['/auth/register']" role="button"
       >Create account</a
     >
-    <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">
+    <button type="submit" class="btn btn-primary" (click)="login()" [disabled]="prodForm.invalid">
       Login
     </button>
+    <button
+      spFbLogin
+      [scopes]="['email', 'public_profile']"
+      class="btn btn-primary"
+      (loginOk)="loggedFacebook($event)"
+      (loginError)="showError($event)"
+    >
+      <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+      Facebook
+    </button>
+
     <button
       spGoogleLogin
       type="button"
@@ -70,15 +81,6 @@
     >
       <fa-icon [icon]="['fab', 'google']"></fa-icon>
       Google Login
-    </button>
-    <button
-
-      type="button"
-      class="btn btn-danger"
-      (loginOk)="loggedGoogle($event)"
-    >
-      <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
-      Facebook Login
     </button>
   </form>
 </div>

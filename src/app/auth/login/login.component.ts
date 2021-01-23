@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
@@ -6,8 +6,8 @@ import { User } from 'src/app/users/interfaces/user';
 import { AuthService } from '../services/auth.service';
 import { GeolocalitationService } from '../services/geolocalitation.service';
 
-import { faUser as fasUser } from '@fortawesome/free-solid-svg-icons';
-import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
+import {faGoogle } from '@fortawesome/free-brands-svg-icons';
+import {faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'sp-login',
@@ -17,7 +17,9 @@ import { faUser as farUser } from '@fortawesome/free-regular-svg-icons';
 export class LoginComponent implements OnInit {
 
   user!: User;
-  constructor(private geolocation: GeolocalitationService, private router: Router, private authService: AuthService) {
+  constructor(private geolocation: GeolocalitationService, private library: FaIconLibrary ,private ngZone:NgZone,private router: Router, private authService: AuthService) {
+    library.addIcons(faGoogle);
+    library.addIcons(faFacebook);
 
   }
 
@@ -48,12 +50,28 @@ export class LoginComponent implements OnInit {
 
   }
 
-  loggedGoogle(user: gapi.auth2.GoogleUser) {
-
-    console.log(user.getAuthResponse().id_token);
-    this.authService.loginGoogle(user.getAuthResponse().id_token).subscribe(x=>{
-      this.router.navigate(['/products']);
+  loggedGoogle(usergoogle: gapi.auth2.GoogleUser) {
+    this.ngZone.run(() => {
+      let token = usergoogle.getAuthResponse().id_token;
+      this.authService.loginGoogle(token).subscribe(x => {
+        this.router.navigate(['/products']);
+      })
     })
+
+  }
+
+
+
+  loggedFacebook(resp: fb.StatusResponse) {
+    // Send this to your server
+
+    this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(x => {
+      this.router.navigate(['/products']);
+    });
+
+  }
+  showError(error: any) {
+    console.error(error);
   }
 
 }

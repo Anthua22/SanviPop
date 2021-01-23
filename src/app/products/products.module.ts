@@ -9,6 +9,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { ProductsFilterPipe } from './pipes/products-filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ProductsRoutingModule,
     ValidatorsModule,
-    FormsModule
+    FormsModule,
+    NgxMapboxGLModule
   ]
 })
 export class ProductsModule { }
