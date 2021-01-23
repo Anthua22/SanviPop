@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       email: ''
     }
     this.getCoordinates();
+    //console.log(this.user)
   }
 
   async getCoordinates(): Promise<void> {
