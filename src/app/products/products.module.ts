@@ -11,7 +11,6 @@ import { ProductsFilterPipe } from './pipes/products-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -21,8 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProductFormComponent,
     ProductCardComponent,
     ProductsFilterPipe,
-    ProductDetailComponent,
-    ProductEditComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

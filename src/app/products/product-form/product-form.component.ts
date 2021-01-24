@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CanComponentDeactivate } from 'src/app/guards/page-leave.guard';
 import { Category } from '../interfaces/category';
 import { Product, ProductAdd } from '../interfaces/product';
@@ -13,9 +14,12 @@ import { ProductsService } from '../services/products.service';
 })
 export class ProductFormComponent implements OnInit, CanComponentDeactivate {
   @Output() add = new EventEmitter<Product>();
+  @ViewChild('errorSwal')
+  public readonly errorSwal!: SwalComponent;
   newProduct!: ProductAdd;
   productRecive!: Product;
   photoFile = '';
+  message:string='';
   emailconfirmation!: string;
   categories: Category[] = [];
   saved = false;
@@ -24,7 +28,8 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     private productsService: ProductsService,
     private categoriesService: CategoriesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public readonly swalTargets:SwalPortalTargets
   ) { }
 
   ngOnInit(): void {
@@ -34,10 +39,18 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
         this.productRecive = x.product;
         this.getData(this.productRecive)
 
+      },
+      err=>{
+        this.message = err;
+        this.errorSwal.fire();
       }
     )
     this.categoriesService.getCategories().subscribe(
-      categories => this.categories = categories
+      categories => this.categories = categories,
+      err=>{
+        this.message = err;
+        this.errorSwal.fire();
+      }
     );
   }
 
@@ -45,7 +58,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     if (otherProduct) {
       this.newProduct.id =otherProduct.id;
       this.newProduct.title = otherProduct.title;
-      this.newProduct.category = otherProduct.category.id;
+      this.newProduct.category =  otherProduct.category.id;
       this.newProduct.description = otherProduct.description;
       this.newProduct.price = otherProduct.price;
 
@@ -64,14 +77,15 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     this.photoFile = '';
   }
 
-  addProduct(): void {
+  operationProduct(): void {
     if (this.productRecive) {
       this.productsService.editProduct(this.newProduct).subscribe(x => {
         this.saved = true;
         this.router.navigate(['/products']);
       },
       err=>{
-        console.error(err)
+        this.message = err;
+        this.errorSwal.fire();
       });
     } else {
       this.newProduct.category = +this.newProduct.category;
@@ -80,7 +94,10 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
           this.saved = true;
           this.router.navigate(['/products']);
         },
-        error => console.error(error)
+        err=>{
+          this.message = err;
+          this.errorSwal.fire();
+        }
       );
     }
 

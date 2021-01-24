@@ -26,12 +26,12 @@ export class ProductsService {
   }
 
   editProduct(product: ProductAdd): Observable<Product> {
-
+    //console.log(product)
     return this.http.put<ProductResponse>(`products/${product.id}`, {
       title: product.title,
       description: product.description,
       price: product.price,
-      category: product.category
+      category: +product.category
     }).pipe(
       map(z => z.product)
     );

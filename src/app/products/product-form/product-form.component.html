@@ -1,4 +1,10 @@
-<form class="mt-4" (ngSubmit)="addProduct()" #prodForm="ngForm">
+<swal icon="error" title="Error Product" #errorSwal>
+  <ng-container *swalPortal="swalTargets.content">
+    {{ message }}
+  </ng-container>
+</swal>
+
+<form class="mt-4" (ngSubmit)="operationProduct()" #prodForm="ngForm">
   <div class="form-group">
     <label for="title">Title</label>
     <input
@@ -125,7 +131,6 @@
     <div class="invalid-feedback">Photo is required</div>
     <img [src]="newProduct.mainPhoto" class="img-thumbnail" />
   </div>
-
 
   <div class="row">
     <div class="col-auto">
