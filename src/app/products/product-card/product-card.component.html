@@ -23,7 +23,10 @@
     </div>
     <div class="col">
       <div class="name">
-        <a [routerLink]="['/users', owner.id]">
+        <a *ngIf="product.mine" [routerLink]="['/users/me']">
+          {{ owner.name }}
+        </a>
+        <a *ngIf="!product.mine" [routerLink]="['/users',owner.id]">
           {{ owner.name }}
         </a>
       </div>
