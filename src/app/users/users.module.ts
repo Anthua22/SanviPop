@@ -5,6 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { UsereditComponent } from './useredit/useredit.component';
 import { FormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     UsersRoutingModule,
     NgxMapboxGLModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module
   ]
 })
 export class UsersModule { }

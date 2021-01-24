@@ -39,6 +39,7 @@ export class AuthService {
 
         catchError((err, caught) => {
           this.logged = false;
+          localStorage.removeItem('token');
           return of(false);
         }))
 
@@ -48,7 +49,7 @@ export class AuthService {
     }
   }
 
-  loginGoogle(token: string) {
+  loginGoogle(token: string):Observable<void> {
     return this.http
       .post<TokenResponse>('auth/google', { token: token })
       .pipe(map((x) => {
