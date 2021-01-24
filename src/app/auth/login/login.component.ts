@@ -6,8 +6,8 @@ import { User } from 'src/app/users/interfaces/user';
 import { AuthService } from '../services/auth.service';
 import { GeolocalitationService } from '../services/geolocalitation.service';
 
-import {faGoogle } from '@fortawesome/free-brands-svg-icons';
-import {faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'sp-login',
@@ -17,7 +17,7 @@ import {faFacebook } from '@fortawesome/free-brands-svg-icons';
 export class LoginComponent implements OnInit {
 
   user!: User;
-  constructor(private geolocation: GeolocalitationService, private library: FaIconLibrary ,private ngZone:NgZone,private router: Router, private authService: AuthService) {
+  constructor(private geolocation: GeolocalitationService, private library: FaIconLibrary, private ngZone: NgZone, private router: Router, private authService: AuthService) {
     library.addIcons(faGoogle);
     library.addIcons(faFacebook);
 

@@ -1,14 +1,22 @@
 <div class="col-3">
-  <img class="w-100" id="avatar" [src]="user.photo" alt="">
+  <img class="w-100" id="avatar" [src]="user.photo" alt="" />
 </div>
 <div class="col-9">
-  <h4>{{user.name}}</h4>
+  <h4>{{ user.name }}</h4>
   <h4>
-      <small class="text-muted">{{user.email}}</small>
+    <small class="text-muted">{{ user.email }}</small>
   </h4>
 
-  <p *ngIf="user.me" >
-      <a [routerLink]="['/users/me']" class="btn btn-primary">Edit profile</a>
+  <p *ngIf="user.me">
+    <a [routerLink]="['/users/edit']" class="btn btn-primary">Edit profile</a>
   </p>
-
+  <mgl-map
+    [style]="'mapbox://styles/mapbox/streets-v11'"
+    [zoom]="[17]"
+    [center]="[user.lng!, user.lat!]"
+  >
+    <mgl-marker
+      [lngLat]="[user.lng!, user.lat!]"
+    ></mgl-marker>
+  </mgl-map>
 </div>

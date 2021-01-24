@@ -10,6 +10,8 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 import { ProductsFilterPipe } from './pipes/products-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 
 @NgModule({
@@ -19,13 +21,15 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     ProductCardComponent,
     ProductsFilterPipe,
     ProductDetailComponent,
+    ProductEditComponent,
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     ValidatorsModule,
     FormsModule,
-    NgxMapboxGLModule
+    NgxMapboxGLModule,
+    SweetAlert2Module
   ]
 })
 export class ProductsModule { }

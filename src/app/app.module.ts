@@ -13,6 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleLoginModule } from './google-login/google-login.module';
 import { FacebookLoginModule } from './facebook-login/facebook-login.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
       app_id:'401208517850489',
       version:'v9.0'
     }),
+    SweetAlert2Module.forRoot(),
     NgxMapboxGLModule.withConfig({
       accessToken:'pk.eyJ1IjoiYW50aG9ueXViaSIsImEiOiJja2dtODlnMjAwYWQ2MnRqbzNlY29ib282In0.wi12UKThrEvuKZ5nWCxq8g'
     })

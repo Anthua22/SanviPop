@@ -1,44 +1,65 @@
-<a [routerLink]="['/products',product.id]"><img class="card-img-top" [src]="product.mainPhoto"></a>
+<a [routerLink]="['/products', product.id]"
+  ><img class="card-img-top" [src]="product.mainPhoto"
+/></a>
 <div class="card-body">
-    <h5 class="card-title"><a [routerLink]="['/products',product.id]" [innerText]="product.title"></a></h5>
-    <p class="card-text">{{product.description}}</p>
-    <div class="row text-muted">
-        <div class="col-auto">{{product.category.name}}</div>
-        <div class="col text-muted text-right">
-          {{product.price | currency:'EUR'}}
-        </div>
+  <h5 class="card-title">
+    <a [routerLink]="['/products', product.id]" [innerText]="product.title"></a>
+  </h5>
+  <p class="card-text">{{ product.description }}</p>
+  <div class="row text-muted">
+    <div class="col-auto">{{ product.category.name }}</div>
+    <div class="col text-muted text-right">
+      {{ product.price | currency: "EUR" }}
     </div>
+  </div>
 </div>
 
 <div class="card-footer bg-transparent">
-    <div class="row">
-        <div class="col-auto avatar pl-1 pr-1">
-            <a [routerLink]="['/users', owner.id]">
-                <img [src]="owner.photo" class="rounded-circle">
-            </a>
-        </div>
-        <div class="col">
-            <div class="name">
-                <a [routerLink]="['/users',owner.id]">
-                    {{owner.name}}
-                </a>
-            </div>
-            <div><small class="text-muted">{{product.datePublished}}</small></div>
-        </div>
-
-        <div class="col-auto" *ngIf="product.mine">
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct()"><i class="fas fa-trash-alt"></i></button>
-        </div>
-
-        <div class="col-auto">
-            <div class="text-muted text-right">
-                <small>{{product.numVisits}} <i class="far fa-eye"></i></small>
-            </div>
-            <div class="text-right text-muted">
-                <small>{{product.distance}} <i>km</i></small>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-auto avatar pl-1 pr-1">
+      <a [routerLink]="['/users', owner.id]">
+        <img [src]="owner.photo" class="rounded-circle" />
+      </a>
     </div>
+    <div class="col">
+      <div class="name">
+        <a [routerLink]="['/users', owner.id]">
+          {{ owner.name }}
+        </a>
+      </div>
+      <div>
+        <small class="text-muted">{{ product.datePublished }}</small>
+      </div>
+    </div>
+
+    <div class="col-auto" *ngIf="product.mine">
+      <swal
+        #deleteSwal
+        title="Are you sure to delete this product?"
+        text="This cannot be undone"
+        icon="question"
+        [showCancelButton]="true"
+        [focusCancel]="true"
+        (confirm)="deleteProduct()"
+      >
+      </swal>
+      <a class="btn btn-outline-info btn-sm" [routerLink]="['edit',product.id!]">
+        <i class="fas fa-edit"></i>
+      </a>
+      <button class="btn btn-outline-danger btn-sm" [swal]="deleteSwal">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+
+
+    </div>
+
+    <div class="col-auto">
+      <div class="text-muted text-right">
+        <small>{{ product.numVisits }} <i class="far fa-eye"></i></small>
+      </div>
+      <div class="text-right text-muted">
+        <small>{{ product.distance }} <i>km</i></small>
+      </div>
+    </div>
+  </div>
 </div>
-
-
