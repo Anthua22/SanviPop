@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ValidatorsModule,
     FormsModule,
     NgxMapboxGLModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    FontAwesomeModule
   ]
 })
 export class ProductsModule { }

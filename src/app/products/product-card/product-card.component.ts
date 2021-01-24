@@ -34,7 +34,7 @@ export class ProductCardComponent implements OnInit {
 
     this.product.datePublished = moment(this.product.datePublished).startOf('hour').fromNow();
     this.owner = this.product.owner!;
-    console.log(this.owner);
+
   }
 
   deleteProduct(): void {

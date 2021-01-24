@@ -1,3 +1,9 @@
+<swal icon="success" title="{{ title }}" #updateProfileSwal>
+  <ng-container *swalPortal="swalTargets.content">
+    {{ message }}
+  </ng-container>
+</swal>
+
 <sp-product-card
   class="card mt-4 shadow"
   [product]="product"

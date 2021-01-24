@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   Router, Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
+  UrlSegment
 } from '@angular/router';
 import { NEVER, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,11 +20,13 @@ export class ProductResolver implements Resolve<Product> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Product> | Observable<never> {
-    return this.productsService.getProduct(route.params.id).pipe(
-      catchError(error => {
-        this.router.navigate(['/products']);
+    let urledit:UrlSegment = route.url[route.url.length-2];
+
+      return this.productsService.getProduct(route.params.id).pipe(catchError(error => {
+        this.router.navigate(['/products/add']);
         return NEVER;
-      })
-    );
-  }
+      }))
+    };
+
+
 }

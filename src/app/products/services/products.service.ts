@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product, ProductAdd } from '../interfaces/product';
 import { ProductResponse } from '../interfaces/responses/product-response';
@@ -24,6 +24,21 @@ export class ProductsService {
       map(resp => resp.product)
     );
   }
+
+  editProduct(product: ProductAdd): Observable<Product> {
+
+    return this.http.put<ProductResponse>(`products/${product.id}`, {
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      category: product.category
+    }).pipe(
+      map(z => z.product)
+    );
+
+  }
+
+
 
   addProduct(product: ProductAdd): Observable<Product> {
     return this.http.post<ProductResponse>('products', product).pipe(

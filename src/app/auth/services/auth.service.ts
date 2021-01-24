@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from 'src/app/users/interfaces/user';
 import { TokenResponse, EmailResponse } from '../responses/user-response';
@@ -10,6 +10,7 @@ import { TokenResponse, EmailResponse } from '../responses/user-response';
 })
 export class AuthService {
   logged: boolean = false;
+  logingChange$= new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -25,26 +26,35 @@ export class AuthService {
       .pipe(map((x) => {
         localStorage.setItem('token', x.accessToken);
         this.logged = true;
+        this.logingChange$.next(true);
       }));
   }
 
   isLooged(): Observable<boolean> {
+    if(this.logged){
+      this.logingChange$.next(true);
+      return of(true);
+
+    }
+
     let token: string | null = localStorage.getItem('token');
     if (token) {
       return this.http.get('auth/validate').pipe(
         map((x) => {
+          this.logingChange$.next(true);
           this.logged = true;
           return true;
         }),
-
         catchError((err, caught) => {
           this.logged = false;
+          this.logingChange$.next(false);
           localStorage.removeItem('token');
           return of(false);
         }))
 
 
     } else {
+      this.logingChange$.next(false);
       return of(false);
     }
   }
@@ -54,10 +64,10 @@ export class AuthService {
       .post<TokenResponse>('auth/google', { token: token })
       .pipe(map((x) => {
         localStorage.setItem('token', x.accessToken);
+        this.logingChange$.next(false);
         this.logged = true;
       }));
   }
-
 
   loginFacebook(token: string): Observable<string> {
     console.log(token);
@@ -65,9 +75,16 @@ export class AuthService {
       .post<TokenResponse>('auth/facebook', { token: token })
       .pipe(map((x) => {
         this.logged = true;
+        this.logingChange$.next(true);
         localStorage.setItem('token', x.accessToken);
         return x.accessToken;
       }));
+  }
+
+  logout():void{
+    this.logingChange$.next(false);
+    localStorage.removeItem('token');
+    this.logged=false;
   }
 
 }

@@ -105,7 +105,7 @@
     </select>
     <div class="invalid-feedback">You must choose a category</div>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!productRecive">
     <label for="image">Main photo</label>
     <input
       type="file"
@@ -123,8 +123,9 @@
       }"
     />
     <div class="invalid-feedback">Photo is required</div>
+    <img [src]="newProduct.mainPhoto" class="img-thumbnail" />
   </div>
-  <img [src]="newProduct.mainPhoto" class="img-thumbnail" />
+
 
   <div class="row">
     <div class="col-auto">

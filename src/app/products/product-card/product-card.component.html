@@ -2,9 +2,19 @@
   ><img class="card-img-top" [src]="product.mainPhoto"
 /></a>
 <div class="card-body">
-  <h5 class="card-title">
-    <a [routerLink]="['/products', product.id]" [innerText]="product.title"></a>
-  </h5>
+  <div class="row">
+    <h5 class="col-11 card-title">
+      <a
+        [routerLink]="['/products', product.id]"
+        [innerText]="product.title"
+      ></a>
+    </h5>
+
+    <button type="button" class="col-1 btn btn-outline-warning btn-sm">
+      <i class="fas fa-heart"></i>
+    </button>
+  </div>
+
   <p class="card-text">{{ product.description }}</p>
   <div class="row text-muted">
     <div class="col-auto">{{ product.category.name }}</div>
@@ -26,7 +36,7 @@
         <a *ngIf="product.mine" [routerLink]="['/users/me']">
           {{ owner.name }}
         </a>
-        <a *ngIf="!product.mine" [routerLink]="['/users',owner.id]">
+        <a *ngIf="!product.mine" [routerLink]="['/users', owner.id]">
           {{ owner.name }}
         </a>
       </div>
@@ -46,14 +56,15 @@
         (confirm)="deleteProduct()"
       >
       </swal>
-      <a class="btn btn-outline-info btn-sm" [routerLink]="['edit',product.id!]">
+      <a
+        class="btn btn-outline-info btn-sm"
+        [routerLink]="['edit', product.id!]"
+      >
         <i class="fas fa-edit"></i>
       </a>
       <button class="btn btn-outline-danger btn-sm" [swal]="deleteSwal">
         <i class="fas fa-trash-alt"></i>
       </button>
-
-
     </div>
 
     <div class="col-auto">

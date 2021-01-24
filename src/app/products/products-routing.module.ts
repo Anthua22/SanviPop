@@ -16,12 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: ProductFormComponent,
+    component: ProductFormComponent
 
   },
   {
     path:'edit/:id',
-    component:ProductEditComponent,
+    component:ProductFormComponent,
     canActivate:[NumericIdGuard],
     resolve:{
       product:ProductResolver
