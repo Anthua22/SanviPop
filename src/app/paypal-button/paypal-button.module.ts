@@ -10,15 +10,14 @@ import { PaypalLoadService } from './services/paypal-load.service';
   declarations: [PaypalButtonComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[PaypalButtonComponent]
 })
 export class PaypalButtonModule {
-  static forRoot(paypalConfig: PaypalConfig):
-    ModuleWithProviders<PaypalButtonModule> {
+  static forRoot(paypalConfig: PaypalConfig):ModuleWithProviders<PaypalButtonModule> {
     return {
       ngModule: PaypalButtonModule,
       providers: [
-        PaypalLoadService,
         { provide: PAYPAL_CONFIG, useValue: paypalConfig }
       ]
     };

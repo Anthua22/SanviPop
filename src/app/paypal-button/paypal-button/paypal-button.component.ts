@@ -1,25 +1,31 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
 import { PaypalConfig, PAYPAL_CONFIG } from '../paypal-button.config';
 import { PaypalLoadService } from '../services/paypal-load.service';
 
-declare var paypal: any;
+declare let paypal: any;
 
 @Component({
   selector: 'sp-paypal-button',
-  templateUrl: './paypal-button.component.html',
-  styleUrls: ['./paypal-button.component.css']
+  template: '',
+  styleUrls: []
 })
 export class PaypalButtonComponent implements OnInit {
 
   @Input() amount!: number;
+  @Input() idButton!:string;
   // true (payment completed), false (payment cancelled)
   @Output() paymentCompleted = new EventEmitter<boolean>();
 
 
-  constructor(@Inject(PAYPAL_CONFIG) private config: PaypalConfig,
+  constructor(@Optional() @Inject(PAYPAL_CONFIG) private config: PaypalConfig,
     private paypalService: PaypalLoadService,
     private elementRef: ElementRef
-  ) { }
+  ) {
+
+    if(!config){
+      throw new Error('PaypalButtonComponent: Paypal configuration no provided. You must call forRoot');
+    }
+  }
 
   ngOnInit(): void {
 

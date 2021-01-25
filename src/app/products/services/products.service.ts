@@ -13,6 +13,12 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
+  getMyProducts():Observable<Product[]>{
+    return this.http.get<ProductsResponse>('products/mine').pipe(
+      map(resp=>resp.products)
+    )
+  }
+
   getProducts(): Observable<Product[]> {
     return this.http.get<ProductsResponse>('products').pipe(
       map(resp => resp.products)
@@ -26,7 +32,6 @@ export class ProductsService {
   }
 
   editProduct(product: ProductAdd): Observable<Product> {
-    //console.log(product)
     return this.http.put<ProductResponse>(`products/${product.id}`, {
       title: product.title,
       description: product.description,
@@ -38,7 +43,9 @@ export class ProductsService {
 
   }
 
-
+  buyProduct(id:number):Observable<void>{
+    return this.http.put<void>(`products/${id}/buy`,{}).pipe();
+  }
 
   addProduct(product: ProductAdd): Observable<Product> {
     return this.http.post<ProductResponse>('products', product).pipe(
@@ -48,5 +55,11 @@ export class ProductsService {
 
   deleteProduct(prodId: number): Observable<void> {
     return this.http.delete<void>(`products/${prodId}`);
+  }
+
+  getProductsMineSold(): Observable<Product[]>{
+    return this.http.get<ProductsResponse>('products/mine/sold').pipe(map(x=>{
+      return x.products
+    }))
   }
 }

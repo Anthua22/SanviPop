@@ -1,3 +1,7 @@
 mgl-map{
   height: 400px;
 }
+
+ng-template{
+  margin-bottom: 200px;
+}

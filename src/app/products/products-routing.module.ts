@@ -21,6 +21,10 @@ const routes: Routes = [
 
   },
   {
+    path:'mine',
+    component:ProductsPageComponent
+  },
+  {
     path:'edit/:id',
     component:ProductFormComponent,
     canActivate:[NumericIdGuard],

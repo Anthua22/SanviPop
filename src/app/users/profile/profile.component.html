@@ -10,13 +10,49 @@
   <p *ngIf="user.me">
     <a [routerLink]="['/users/edit']" class="btn btn-primary">Edit profile</a>
   </p>
-  <mgl-map
+
+  <div *ngIf="user.me">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>My Products</a>
+        <ng-template ngbNavContent>
+          <div class="card-columns mt-4 mb-4">
+            <sp-product-card
+              class="card shadow"
+              [product]="product"
+              *ngFor="let product of myProducts"
+            >
+            </sp-product-card>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Products Favorites</a>
+        <ng-template ngbNavContent>Second content</ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink>Products Boughts</a>
+        <ng-template ngbNavContent>
+          <div class="card-columns mt-4 mb-4">
+            <sp-product-card
+              class="card shadow"
+              [product]="product"
+              *ngFor="let product of productsBoughts"
+
+            >
+            </sp-product-card>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+
+  <mgl-map *ngIf="!user.me"
     [style]="'mapbox://styles/mapbox/streets-v11'"
     [zoom]="[17]"
     [center]="[user.lng!, user.lat!]"
   >
-    <mgl-marker
-      [lngLat]="[user.lng!, user.lat!]"
-    ></mgl-marker>
+    <mgl-marker [lngLat]="[user.lng!, user.lat!]"></mgl-marker>
   </mgl-map>
 </div>

@@ -38,14 +38,12 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     this.route.data.subscribe(
       x => {
         let product: Product = x.product;
-        if (product.mine) {
+        if ( product&& product.mine) {
           this.productRecive = product;
           this.getData(this.productRecive)
         }else{
           this.router.navigate(['/products/add']);
         }
-
-
 
       },
       err => {
@@ -97,9 +95,10 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
         });
     } else {
       this.newProduct.category = +this.newProduct.category;
+
       this.productsService.addProduct(this.newProduct).subscribe(
         product => {
-          this.saved = true;
+          this.saved = true;  console.log(product)
           this.router.navigate(['/products']);
         },
         err => {
@@ -122,7 +121,6 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
 
   async canDeactivate(): Promise<boolean> {
     return this.saved || await (await this.errorSwal.fire()).isConfirmed;
-
   }
 
 }

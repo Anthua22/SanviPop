@@ -1,3 +1,9 @@
+<swal icon="success" title="Product Bought" #buySwal>
+  <ng-container *swalPortal="swalTargets.content">
+    Successfully bought product
+  </ng-container>
+</swal>
+
 <a [routerLink]="['/products', product.id]"
   ><img class="card-img-top" [src]="product.mainPhoto"
 /></a>
@@ -10,7 +16,7 @@
       ></a>
     </h5>
 
-    <button type="button" class="col-1 btn btn-outline-warning btn-sm">
+    <button *ngIf="!product.mine" type="button" class="col-1 btn btn-outline-warning btn-sm">
       <i class="fas fa-heart"></i>
     </button>
   </div>
@@ -21,10 +27,14 @@
     <div class="col text-muted text-right">
       {{ product.price | currency: "EUR" }}
     </div>
-
-    <p>
-      {{payedMessage}}
-    </p>
+    <sp-paypal-button
+      *ngIf="!product.mine"
+      class="text-center w-100 mt-2"
+      id="{{ idbutton }}"
+      [amount]="product.price"
+      (paymentCompleted)="getPayment($event)"
+      >></sp-paypal-button
+    >
   </div>
 </div>
 

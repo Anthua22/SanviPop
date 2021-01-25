@@ -32,8 +32,12 @@ import { PaypalButtonComponent } from '../paypal-button/paypal-button/paypal-but
     FormsModule,
     NgxMapboxGLModule,
     SweetAlert2Module,
-    FontAwesomeModule
+    FontAwesomeModule,
+    PaypalButtonModule
 
+  ],
+  exports:[
+    ProductCardComponent
   ]
 })
 export class ProductsModule { }

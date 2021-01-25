@@ -7,6 +7,9 @@ import { UsereditComponent } from './useredit/useredit.component';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsModule } from '../products/products.module';
+
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     UsersRoutingModule,
     NgxMapboxGLModule,
     FormsModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    NgbNavModule,
+    ProductsModule
   ]
 })
 export class UsersModule { }

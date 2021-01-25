@@ -16,26 +16,38 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
   payedMessage = '';
+  idbutton!:string;
 
-  @ViewChild('helloSwal') private helloSwal!: SwalComponent;
+  @ViewChild('buySwal') private buySwal!: SwalComponent;
 
   name: string = '';
   @Output() deleted = new EventEmitter<void>();
   owner!: User;
 
   constructor(private productsService: ProductsService, public readonly swalTargets: SwalPortalTargets) { }
-  sayHello(name: string): void {
-    this.name = name;
-    this.helloSwal.fire();
-  }
+
   getPayment(ok: boolean) {
-    this.payedMessage = ok ? 'Payment correct!' : 'Payment cancelled';
+    if(ok){
+      this.productsService.buyProduct(this.product.id!).subscribe(
+          x=>{
+            this.buySwal.fire();
+          },
+          err=>{
+            this.buySwal.title = "Error"
+            this.buySwal.icon = "error"
+            this.buySwal.text = "Error buying the product"
+            this.buySwal.fire();
+          }
+      );
+    }
+
   }
 
   ngOnInit(): void {
 
     this.product.datePublished = moment(this.product.datePublished).startOf('hour').fromNow();
     this.owner = this.product.owner!;
+    this.idbutton =  this.product.title+this.product.id;
 
   }
 

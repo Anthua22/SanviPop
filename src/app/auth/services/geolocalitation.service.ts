@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class GeolocalitationService {
 
 
   getLocation(): Promise<Coordinates> {
+
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         pos => {

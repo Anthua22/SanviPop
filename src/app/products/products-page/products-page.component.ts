@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
 
@@ -14,9 +15,13 @@ export class ProductsPageComponent implements OnInit {
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+
     this.productsService.getProducts().subscribe(
       products => this.products = products
     );
+
+
+
   }
 
   addProduct(product: Product): void {
