@@ -19,7 +19,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
   newProduct!: ProductAdd;
   productRecive!: Product;
   photoFile = '';
-  message:string='';
+  message: string = '';
   emailconfirmation!: string;
   categories: Category[] = [];
   saved = false;
@@ -29,36 +29,43 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     private categoriesService: CategoriesService,
     private router: Router,
     private route: ActivatedRoute,
-    public readonly swalTargets:SwalPortalTargets
+    public readonly swalTargets: SwalPortalTargets
   ) { }
 
   ngOnInit(): void {
     this.resetForm();
     this.route.data.subscribe(
       x => {
-        this.productRecive = x.product;
-        this.getData(this.productRecive)
+        let product: Product = x.product;
+        if (product.mine) {
+          this.productRecive = product;
+          this.getData(this.productRecive)
+        }else{
+          this.router.navigate(['/products/add']);
+        }
+
+
 
       },
-      err=>{
+      err => {
         this.message = err;
         this.errorSwal.fire();
       }
     )
     this.categoriesService.getCategories().subscribe(
       categories => this.categories = categories,
-      err=>{
+      err => {
         this.message = err;
         this.errorSwal.fire();
       }
     );
   }
 
-  getData(otherProduct: Product) {
+  private getData(otherProduct: Product) {
     if (otherProduct) {
-      this.newProduct.id =otherProduct.id;
+      this.newProduct.id = otherProduct.id;
       this.newProduct.title = otherProduct.title;
-      this.newProduct.category =  otherProduct.category.id;
+      this.newProduct.category = otherProduct.category.id;
       this.newProduct.description = otherProduct.description;
       this.newProduct.price = otherProduct.price;
 
@@ -83,10 +90,10 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
         this.saved = true;
         this.router.navigate(['/products']);
       },
-      err=>{
-        this.message = err;
-        this.errorSwal.fire();
-      });
+        err => {
+          this.message = err;
+          this.errorSwal.fire();
+        });
     } else {
       this.newProduct.category = +this.newProduct.category;
       this.productsService.addProduct(this.newProduct).subscribe(
@@ -94,7 +101,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
           this.saved = true;
           this.router.navigate(['/products']);
         },
-        err=>{
+        err => {
           this.message = err;
           this.errorSwal.fire();
         }
@@ -113,7 +120,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): boolean {
-    console.log('der');
+
     return this.saved || confirm('Are you sure you want to leave this page?. Changes will be lost...');
   }
 

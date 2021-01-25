@@ -30,7 +30,9 @@ export class UserService {
   }
 
   updateAvatar(avatar: string): Observable<string> {
-    return this.http.put<PhotoResponse>('users/me/photo', { photo: avatar }).pipe(map(x => {
+    return this.http.put<PhotoResponse>('users/me/photo', { photo: avatar })
+    .pipe(
+      map(x => {
       return x.photo;
     }), catchError((resp: HttpErrorResponse) => throwError(`Error Update photo. Status: ${resp.status}. Message: ${resp.message}`)));
   }

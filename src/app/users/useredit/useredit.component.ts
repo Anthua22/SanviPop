@@ -77,8 +77,8 @@ export class UsereditComponent implements OnInit {
     if (this.password === this.passwordconfirm && this.password.length > 0) {
       this.userService.updatePassword(this.password).subscribe(
         x => {
+          this.title = "Password Update";
           this.message = 'The password has changed update successfull';
-          this.title = 'Password Update';
           this.password='';
           this.passwordconfirm='';
           this.componentSwal.fire();

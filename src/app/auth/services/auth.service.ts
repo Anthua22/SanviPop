@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from 'src/app/users/interfaces/user';
+import { ResponseError } from '../interfaces/responses';
 import { TokenResponse, EmailResponse } from '../responses/user-response';
 
 @Injectable({
@@ -17,7 +18,11 @@ export class AuthService {
   register(user: User): Observable<string> {
     return this.http
       .post<EmailResponse>('auth/register', user)
-      .pipe(map((resp) => resp.email));
+      .pipe(map((resp) => resp.email), catchError((err:ResponseError)=>{
+        let mensaje:string =err.message.join();
+
+        throw('ss');
+      }));
   }
 
   login(user: User): Observable<void> {
@@ -34,7 +39,6 @@ export class AuthService {
     if(this.logged){
       this.logingChange$.next(true);
       return of(true);
-
     }
 
     let token: string | null = localStorage.getItem('token');

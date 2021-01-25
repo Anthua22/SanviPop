@@ -14,6 +14,7 @@ import { GoogleLoginModule } from './google-login/google-login.module';
 import { FacebookLoginModule } from './facebook-login/facebook-login.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PaypalButtonModule } from './paypal-button/paypal-button.module';
 
 
 @NgModule({
@@ -35,6 +36,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SweetAlert2Module.forRoot(),
     NgxMapboxGLModule.withConfig({
       accessToken:'pk.eyJ1IjoiYW50aG9ueXViaSIsImEiOiJja2dtODlnMjAwYWQ2MnRqbzNlY29ib282In0.wi12UKThrEvuKZ5nWCxq8g'
+    }),
+    PaypalButtonModule.forRoot({
+      sandbox:'AZXmq-JNt50e5f5ClMZLS2EOan_7Ndz7_-ZFK_OXNa6qmahSMXDhCHMyCLJt52A96XulZLb2PgeQ20FN',
+      production:'',
+      environment:'sandbox'
     })
   ],
   providers: [

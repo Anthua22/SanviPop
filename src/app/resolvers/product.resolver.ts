@@ -6,7 +6,7 @@ import {
   UrlSegment
 } from '@angular/router';
 import { NEVER, Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Product } from '../products/interfaces/product';
 import { ProductsService } from '../products/services/products.service';
 
@@ -22,7 +22,12 @@ export class ProductResolver implements Resolve<Product> {
   ): Observable<Product> | Observable<never> {
     let urledit:UrlSegment = route.url[route.url.length-2];
 
-      return this.productsService.getProduct(route.params.id).pipe(catchError(error => {
+      return this.productsService.getProduct(route.params.id).pipe(map(x=>{
+        if(urledit.path==='edit' && !x.mine){
+          this.router.navigate(['/products/add']);
+        }
+        return x;
+      }),catchError(error => {
         this.router.navigate(['/products/add']);
         return NEVER;
       }))

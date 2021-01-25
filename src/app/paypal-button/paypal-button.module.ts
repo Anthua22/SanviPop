@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaypalButtonComponent } from './paypal-button/paypal-button.component';
+import { PaypalConfig, PAYPAL_CONFIG } from './paypal-button.config';
+import { PaypalLoadService } from './services/paypal-load.service';
 
 
 
@@ -10,4 +12,16 @@ import { PaypalButtonComponent } from './paypal-button/paypal-button.component';
     CommonModule
   ]
 })
-export class PaypalButtonModule { }
+export class PaypalButtonModule {
+  static forRoot(paypalConfig: PaypalConfig):
+    ModuleWithProviders<PaypalButtonModule> {
+    return {
+      ngModule: PaypalButtonModule,
+      providers: [
+        PaypalLoadService,
+        { provide: PAYPAL_CONFIG, useValue: paypalConfig }
+      ]
+    };
+  }
+
+}

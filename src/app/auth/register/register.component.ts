@@ -1,7 +1,8 @@
 
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { User } from 'src/app/users/interfaces/user';
 import { AuthService } from '../services/auth.service';
 import { GeolocalitationService } from '../services/geolocalitation.service';
@@ -17,14 +18,19 @@ export class RegisterComponent implements OnInit {
   newUser!: User;
   repeatemail!: string;
   photoFile!: string;
-
-  constructor(private authService: AuthService, private router: Router, private geolocationService:GeolocalitationService) {
+  message: string = '';
+  @ViewChild('errorSwal')
+  public readonly errorSwal!: SwalComponent;
+  constructor(private authService: AuthService,
+    private router: Router,
+    private geolocationService: GeolocalitationService,
+    public readonly swalTargets: SwalPortalTargets) {
 
   }
 
   ngOnInit(): void {
     this.newUser = {
-      photo: 'dd',
+      photo: '',
       name: '',
       lat: 0,
       lng: 0,
@@ -33,10 +39,15 @@ export class RegisterComponent implements OnInit {
     };
     this.photoFile = '';
 
-    this.geolocationService.getLocation().then(x=>{
-      this.newUser.lat=x.latitude;
-      this.newUser.lng=x.longitude;
-    });
+    this.geolocationService.getLocation().then(x => {
+      this.newUser.lat = x.latitude;
+      this.newUser.lng = x.longitude;
+    }).catch(
+      x => {
+        this.message = 'You need to give your location in order to register';
+        this.errorSwal.fire();
+      }
+    );
 
 
   }
@@ -56,6 +67,9 @@ export class RegisterComponent implements OnInit {
       user => {
 
         this.router.navigate(['/auth/login']);
+      },
+      err=>{
+
       }
     )
   }

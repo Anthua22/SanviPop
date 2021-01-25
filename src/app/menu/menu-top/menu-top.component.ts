@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class MenuTopComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
   login:boolean=false;
   ngOnInit(): void {
     this.authService.logingChange$.subscribe(x=>{
@@ -17,5 +17,9 @@ export class MenuTopComponent implements OnInit {
     })
   }
 
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
 
 }

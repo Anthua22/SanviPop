@@ -19,7 +19,7 @@
       <a class="nav-link" *ngIf="!login" [routerLink]="['/auth/login']" [routerLinkActive]="['active']">Login</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" *ngIf="login" [routerLink]="['/auth/login']" [routerLinkActive]="['active']">Logout</a>
+      <a class="nav-link logout" *ngIf="login" (click)="logout()" [routerLinkActive]="['active']">Logout</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" *ngIf="!login" [routerLink]="['/auth/register']" [routerLinkActive]="['active']">Register</a>

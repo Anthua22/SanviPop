@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleLoginModule } from '../google-login/google-login.module';
 import { FacebookLoginModule } from '../facebook-login/facebook-login.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -20,7 +21,8 @@ import { FacebookLoginModule } from '../facebook-login/facebook-login.module';
     FormsModule,
     FontAwesomeModule,
     GoogleLoginModule,
-    FacebookLoginModule
+    FacebookLoginModule,
+    SweetAlert2Module
   ]
 })
 export class AuthModule { }

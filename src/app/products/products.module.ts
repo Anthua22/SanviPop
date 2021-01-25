@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PaypalButtonModule } from '../paypal-button/paypal-button.module';
+import { PaypalButtonComponent } from '../paypal-button/paypal-button/paypal-button.component';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProductDetailComponent
   ],
   imports: [
+
     CommonModule,
     ProductsRoutingModule,
     ValidatorsModule,
@@ -30,6 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgxMapboxGLModule,
     SweetAlert2Module,
     FontAwesomeModule
+
   ]
 })
 export class ProductsModule { }
