@@ -1,6 +1,6 @@
-<swal icon="error" title="Error Product" #errorSwal>
+<swal icon="warning" title="Save change" [showCancelButton]="true" #errorSwal>
   <ng-container *swalPortal="swalTargets.content">
-    {{ message }}
+     Are you sure you want to leave this page?. Changes will be lost...
   </ng-container>
 </swal>
 

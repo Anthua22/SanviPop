@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CanComponentDeactivate } from 'src/app/guards/page-leave.guard';
+import { SweetAlertResult } from 'sweetalert2';
 import { Category } from '../interfaces/category';
 import { Product, ProductAdd } from '../interfaces/product';
 import { CategoriesService } from '../services/categories.service';
@@ -119,9 +120,9 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     });
   }
 
-  canDeactivate(): boolean {
+  async canDeactivate(): Promise<boolean> {
+    return this.saved || await (await this.errorSwal.fire()).isConfirmed;
 
-    return this.saved || confirm('Are you sure you want to leave this page?. Changes will be lost...');
   }
 
 }
