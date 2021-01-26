@@ -63,7 +63,17 @@ export class ProductsService {
     }))
   }
 
+  getBookMarked():Observable<Product[]>{
+    return this.http.get<ProductsResponse>('products/bookmarks').pipe(map(x=>{
+      return x.products
+    }));
+  }
+
   addFavorite(id:number):Observable<void>{
     return this.http.post<void>(`products/${id}/bookmarks`,{}).pipe();
+  }
+
+  deleteFavorite(id:number):Observable<void>{
+    return this.http.delete<void>(`products/${id}/bookmarks`).pipe();
   }
 }

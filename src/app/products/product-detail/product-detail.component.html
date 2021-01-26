@@ -4,11 +4,29 @@
   </ng-container>
 </swal>
 
+<swal icon="success" title="Product Bought" (confirm)="goBack()" #buySwal>
+  <ng-container *swalPortal="swalTargets.content">
+    Successfully bought product
+  </ng-container>
+</swal>
+
 <sp-product-card
+  #productcard
   class="card mt-4 shadow"
   [product]="product"
   (deleted)="goBack()"
 ></sp-product-card>
+
+<sp-paypal-button
+  class="center"
+  *ngIf="!product.mine"
+  id="product"
+  [amount]="product.price"
+  (paymentCompleted)="getPayment($event)"
+  >></sp-paypal-button
+>
+
+<!--
 <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
   [zoom]="[17]"
@@ -17,7 +35,7 @@
   <mgl-marker
     [lngLat]="[product.owner!.lng!, product.owner!.lat!]"
   ></mgl-marker>
-</mgl-map>
+</mgl-map>-->
 <div class="mt-4 mb-4">
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>

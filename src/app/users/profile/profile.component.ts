@@ -12,31 +12,42 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user!:User;
-  active:number=1;
-  productsFavorites!:Product[];
-  myProducts!:Product[];
-  productsSolds!:Product[];
+  user!: User;
+  active: number = 1;
+  productsFavorites!: Product[];
+  myProducts!: Product[];
+  productsSolds!: Product[];
   public readonly nav!: NgbNav;
-  constructor(private route: ActivatedRoute, private ngZone:NgZone,private productService:ProductsService) { }
+  constructor(private route: ActivatedRoute, private ngZone: NgZone, private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
-      x=>this.user = x.user
+      x => this.user = x.user
     );
-    this.productService.getMyProducts().subscribe(x=>this.myProducts=x,
-      err=>console.error(err));
-    this.productService.getProductsMineSold().subscribe(x=>this.productsSolds=x)
+    this.productService.getMyProducts().subscribe(x => this.myProducts = x,
+      err => console.error(err));
+    this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
+    this.productService.getBookMarked().subscribe(x=>this.productsFavorites=x);
 
   }
 
-  deleteProduct(product:Product){
-    this.ngZone.run(()=>{
-      this.myProducts = this.myProducts.filter(p => p !== product);
-    })
-
-    //this.productsSolds = this.productsSolds.filter(p => p !== product);
+  deleteProduct(product: Product) {
+    console.log(product)
+    this.myProducts = this.myProducts.filter(p => p !== product);
+  }
+  changeFavorite(element: HTMLElement, product:Product): void {
+    this.productsFavorites = this.productsFavorites.filter(x=>product!=x);
+    if (element.children[0].classList.contains('far')) {
+      element.children[0].classList.remove('far');
+      element.children[0].classList.add('fas');
+    }else{
+      element.children[0].classList.add('far');
+      element.children[0].classList.remove('fas');
+    }
 
   }
 
+  changeListFavorites(product:Product){
+    this.productsFavorites.filter(x=>x!=product);
+  }
 }

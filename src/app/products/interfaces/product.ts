@@ -17,6 +17,8 @@ interface ProductBase {
   photos?: Photo;
   datePublished?: string;
   distance?: number;
+  status?:number;
+  favorite?:boolean
 
 }
 

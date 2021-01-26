@@ -29,10 +29,21 @@
       </li>
       <li [ngbNavItem]="2">
         <a ngbNavLink>Products Favorites</a>
-        <ng-template ngbNavContent>Second content</ng-template>
+        <ng-template ngbNavContent>
+          <div class="card-columns mt-4 mb-4">
+            <sp-product-card
+              class="card shadow"
+              [product]="product"
+              (favorite)="changeFavorite($event, product)"
+              *ngFor="let product of productsFavorites"
+
+            >
+            </sp-product-card>
+          </div>
+        </ng-template>
       </li>
       <li [ngbNavItem]="3">
-        <a ngbNavLink>Products Boughts</a>
+        <a ngbNavLink>Products Solds</a>
         <ng-template ngbNavContent>
           <div class="card-columns mt-4 mb-4">
             <sp-product-card
@@ -41,7 +52,6 @@
               (deleted)="deleteProduct(product)"
 
               *ngFor="let product of productsSolds"
-
             >
             </sp-product-card>
           </div>
@@ -51,7 +61,8 @@
     <div [ngbNavOutlet]="nav"></div>
   </div>
 
-  <mgl-map *ngIf="!user.me"
+  <mgl-map
+    *ngIf="!user.me"
     [style]="'mapbox://styles/mapbox/streets-v11'"
     [zoom]="[17]"
     [center]="[user.lng!, user.lat!]"

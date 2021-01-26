@@ -5,7 +5,6 @@ import { User } from 'src/app/users/interfaces/user';
 import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
 import * as moment from 'moment';
-import { UserService } from 'src/app/users/services/user.service';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -15,41 +14,38 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
-  @Input() star!:HTMLElement;
-  payedMessage = '';
-  idbutton!:string;
 
-  @ViewChild('buySwal') private buySwal!: SwalComponent;
+  payedMessage = '';
+  idbutton!: string;
+
+  productsFavorite!: Product[];
 
   name: string = '';
   @Output() deleted = new EventEmitter<void>();
   @Output() favorite = new EventEmitter<HTMLElement>();
+
+
   owner!: User;
 
   constructor(private productsService: ProductsService, public readonly swalTargets: SwalPortalTargets) { }
 
-  getPayment(ok: boolean) {
-    if(ok){
-      this.productsService.buyProduct(this.product.id!).subscribe(
-          x=>{
-            this.buySwal.fire();
-          },
-          err=>{
-            this.buySwal.title = "Error"
-            this.buySwal.icon = "error"
-            this.buySwal.text = "Error buying the product"
-            this.buySwal.fire();
-          }
-      );
-    }
-
-  }
 
   ngOnInit(): void {
 
     this.product.datePublished = moment(this.product.datePublished).startOf('hour').fromNow();
     this.owner = this.product.owner!;
-    this.idbutton =  this.product.title+this.product.id;
+    this.idbutton = this.product.title + this.product.id;
+    this.productsService.getBookMarked().subscribe(
+      x => {
+        this.productsFavorite = x;
+        this.productsFavorite.forEach(x => {
+          if (x.id === this.product.id) {
+            this.product.favorite = true;
+
+          }
+        })
+      }
+    )
 
   }
 
@@ -61,11 +57,25 @@ export class ProductCardComponent implements OnInit {
 
   }
 
-  addFavorite(element:HTMLElement):void{
-    this.productsService.addFavorite(this.product.id as number).subscribe(
-      ()=>this.favorite.emit(element),
-      err=>console.error(err)
-    )
+  changeFavorite(element: HTMLElement): void {
+
+    if (element.children[0].classList.contains('far')) {
+      this.productsService.addFavorite(this.product.id as number).subscribe(
+        () => {
+          this.favorite.emit(element);
+
+        },
+        err => console.error(err)
+      )
+    } else {
+      this.productsService.deleteFavorite(this.product.id!).subscribe(
+        () => {
+          this.favorite.emit(element)
+        },
+        err => console.error(err)
+      )
+    }
+
   }
 
 

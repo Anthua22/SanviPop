@@ -5,7 +5,7 @@
   </form>
 </nav>
 <div class="card-columns mt-4 mb-4">
-  <sp-product-card class="card shadow" [product]="product" (favorite)="addFavorite($event)" (deleted)="deleteProduct(product)"
+  <sp-product-card class="card shadow" [product]="product" (favorite)="changeFavorite($event)" (deleted)="deleteProduct(product)"
     *ngFor="let product of products | productsFilter:search">
   </sp-product-card>
 </div>

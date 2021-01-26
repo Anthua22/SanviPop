@@ -11,15 +11,18 @@ import { ProductsService } from '../services/products.service';
 })
 export class ProductDetailComponent implements OnInit {
   product!: Product;
-  title:string='';
-  message:string='';
+  title: string = '';
+  message: string = '';
   @ViewChild('errorSwal')
   public readonly errorSwal!: SwalComponent;
+  @ViewChild('buySwal')
+  private buySwal!: SwalComponent;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public readonly swalTargets:SwalPortalTargets
+    public readonly swalTargets: SwalPortalTargets,
+    private productsService:ProductsService
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +34,24 @@ export class ProductDetailComponent implements OnInit {
         this.errorSwal.fire();
       }
     );
+  }
+
+
+  getPayment(ok: boolean) {
+    if (ok) {
+      this.productsService.buyProduct(this.product.id!).subscribe(
+        x => {
+          this.buySwal.fire();
+        },
+        err => {
+          this.buySwal.title = "Error"
+          this.buySwal.icon = "error"
+          this.buySwal.text = "Error buying the product"
+          this.buySwal.fire();
+        }
+      );
+    }
+
   }
 
   goBack(): void {

@@ -1,9 +1,3 @@
-<swal icon="success" title="Product Bought" #buySwal>
-  <ng-container *swalPortal="swalTargets.content">
-    Successfully bought product
-  </ng-container>
-</swal>
-
 <a [routerLink]="['/products', product.id]"
   ><img class="card-img-top" [src]="product.mainPhoto"
 /></a>
@@ -16,8 +10,16 @@
       ></a>
     </h5>
 
-    <button *ngIf="!product.mine" type="button" (click)="addFavorite(start)" class="col-2 btn btn-lg fav">
-      <i class="far fa-heart" #start></i>
+    <button
+      *ngIf="!product.mine"
+      type="button"
+      (click)="changeFavorite(start)"
+      class="col-2 btn btn-lg fav"
+    >
+      <div #start>
+        <i class="far fa-heart" *ngIf="!product.favorite"></i>
+        <i class="fas fa-heart" *ngIf="product.favorite"></i>
+      </div>
     </button>
   </div>
 
@@ -27,14 +29,6 @@
     <div class="col text-muted text-right">
       {{ product.price | currency: "EUR" }}
     </div>
-    <sp-paypal-button
-      *ngIf="!product.mine"
-      class="text-center w-100 mt-2"
-      id="{{ idbutton }}"
-      [amount]="product.price"
-      (paymentCompleted)="getPayment($event)"
-      >></sp-paypal-button
-    >
   </div>
 </div>
 
@@ -59,7 +53,7 @@
       </div>
     </div>
 
-    <div class="col-auto" *ngIf="product.mine">
+    <div class="col-auto" *ngIf="product.mine && product.status != 3">
       <swal
         #deleteSwal
         title="Are you sure to delete this product?"
@@ -72,7 +66,7 @@
       </swal>
       <a
         class="btn btn-outline-info btn-sm"
-        [routerLink]="['edit', product.id!]"
+        [routerLink]="['/products/edit', product.id!]"
       >
         <i class="fas fa-edit"></i>
       </a>

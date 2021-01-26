@@ -14,24 +14,26 @@ import { ProductsService } from '../products/services/products.service';
   providedIn: 'root'
 })
 export class ProductResolver implements Resolve<Product> {
-  constructor(private productsService: ProductsService, private router: Router) {}
+  constructor(private productsService: ProductsService, private router: Router) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Product> | Observable<never> {
-    let urledit:UrlSegment = route.url[route.url.length-2];
+    let urledit: UrlSegment = route.url[route.url.length - 2];
 
-      return this.productsService.getProduct(route.params.id).pipe(map(x=>{
-        if(urledit.path==='edit' && !x.mine){
-          this.router.navigate(['/products/add']);
-        }
-        return x;
-      }),catchError(error => {
+    return this.productsService.getProduct(route.params.id).pipe(map(x => {
+      if (urledit && urledit.path === 'edit' && !x.mine) {
         this.router.navigate(['/products/add']);
-        return NEVER;
-      }))
-    };
+        console.log('dsdf');
+      }
+      return x;
+    }), catchError(error => {
+      console.log(error);
+      this.router.navigate(['/products/add']);
+      return NEVER;
+    }))
+  };
 
 
 }

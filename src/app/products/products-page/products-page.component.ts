@@ -10,6 +10,7 @@ import { ProductsService } from '../services/products.service';
 })
 export class ProductsPageComponent implements OnInit {
   products: Product[] = [];
+
   search = '';
 
   constructor(private productsService: ProductsService) { }
@@ -19,8 +20,6 @@ export class ProductsPageComponent implements OnInit {
     this.productsService.getProducts().subscribe(
       products => this.products = products
     );
-
-
 
   }
 
@@ -34,8 +33,17 @@ export class ProductsPageComponent implements OnInit {
     this.products = this.products.filter(p => p !== product);
   }
 
-  addFavorite(element:HTMLElement):void{
-    element.classList.remove('far');
-    element.classList.add('fab');
+  changeFavorite(element: HTMLElement): void {
+
+    if (element.children[0].classList.contains('far')) {
+      element.children[0].classList.remove('far');
+      element.children[0].classList.add('fas');
+    }else{
+      element.children[0].classList.add('far');
+      element.children[0].classList.remove('fas');
+    }
+
   }
+
+
 }
