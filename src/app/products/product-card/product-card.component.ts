@@ -15,6 +15,7 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
+  @Input() star!:HTMLElement;
   payedMessage = '';
   idbutton!:string;
 
@@ -22,6 +23,7 @@ export class ProductCardComponent implements OnInit {
 
   name: string = '';
   @Output() deleted = new EventEmitter<void>();
+  @Output() favorite = new EventEmitter<HTMLElement>();
   owner!: User;
 
   constructor(private productsService: ProductsService, public readonly swalTargets: SwalPortalTargets) { }
@@ -58,5 +60,13 @@ export class ProductCardComponent implements OnInit {
     );
 
   }
+
+  addFavorite(element:HTMLElement):void{
+    this.productsService.addFavorite(this.product.id as number).subscribe(
+      ()=>this.favorite.emit(element),
+      err=>console.error(err)
+    )
+  }
+
 
 }

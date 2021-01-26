@@ -37,7 +37,9 @@
             <sp-product-card
               class="card shadow"
               [product]="product"
-              *ngFor="let product of productsBoughts"
+              (deleted)="deleteProduct(product)"
+
+              *ngFor="let product of productsSolds"
 
             >
             </sp-product-card>

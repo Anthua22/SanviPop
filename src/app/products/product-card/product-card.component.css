@@ -21,3 +21,8 @@
 .card-footer .name:hover {
   text-decoration: underline;
 }
+
+.fav{
+  color: rgba(223, 223, 48, 0.486);
+}
+

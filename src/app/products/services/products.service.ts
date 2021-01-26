@@ -62,4 +62,8 @@ export class ProductsService {
       return x.products
     }))
   }
+
+  addFavorite(id:number):Observable<void>{
+    return this.http.post<void>(`products/${id}/bookmarks`,{}).pipe();
+  }
 }

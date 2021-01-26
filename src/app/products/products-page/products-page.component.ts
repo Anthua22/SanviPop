@@ -33,4 +33,9 @@ export class ProductsPageComponent implements OnInit {
     // Creating a new array with filter instead of using .splice, re-executes the filter pipe
     this.products = this.products.filter(p => p !== product);
   }
+
+  addFavorite(element:HTMLElement):void{
+    element.classList.remove('far');
+    element.classList.add('fab');
+  }
 }

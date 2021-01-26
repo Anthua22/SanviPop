@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/products/interfaces/product';
@@ -16,9 +16,9 @@ export class ProfileComponent implements OnInit {
   active:number=1;
   productsFavorites!:Product[];
   myProducts!:Product[];
-  productsBoughts!:Product[];
+  productsSolds!:Product[];
   public readonly nav!: NgbNav;
-  constructor(private router:Router,private route: ActivatedRoute, private productService:ProductsService) { }
+  constructor(private route: ActivatedRoute, private ngZone:NgZone,private productService:ProductsService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
@@ -26,10 +26,17 @@ export class ProfileComponent implements OnInit {
     );
     this.productService.getMyProducts().subscribe(x=>this.myProducts=x,
       err=>console.error(err));
-    this.productService.getProductsMineSold().subscribe(x=>this.productsBoughts=x)
+    this.productService.getProductsMineSold().subscribe(x=>this.productsSolds=x)
 
   }
 
+  deleteProduct(product:Product){
+    this.ngZone.run(()=>{
+      this.myProducts = this.myProducts.filter(p => p !== product);
+    })
 
+    //this.productsSolds = this.productsSolds.filter(p => p !== product);
+
+  }
 
 }
