@@ -20,6 +20,7 @@
             <sp-product-card
               class="card shadow"
               [product]="product"
+              (deleted)="deleteProduct(product)"
               *ngFor="let product of myProducts"
             >
             </sp-product-card>
