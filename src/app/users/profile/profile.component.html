@@ -11,30 +11,31 @@
     <a [routerLink]="['/users/edit']" class="btn btn-primary">Edit profile</a>
   </p>
 
-  <div *ngIf="user.me">
+  <div>
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
       <li [ngbNavItem]="1">
-        <a ngbNavLink>My Products</a>
+        <a ngbNavLink>Products Selling</a>
         <ng-template ngbNavContent>
           <div class="card-columns mt-4 mb-4">
             <sp-product-card
               class="card shadow"
               [product]="product"
               (deleted)="deleteProduct(product)"
+              (favorite)="changeFavorite($event)"
               *ngFor="let product of myProducts"
             >
             </sp-product-card>
           </div>
         </ng-template>
       </li>
-      <li [ngbNavItem]="2">
+      <li [ngbNavItem]="2" *ngIf="user.me">
         <a ngbNavLink>Products Favorites</a>
         <ng-template ngbNavContent>
           <div class="card-columns mt-4 mb-4">
             <sp-product-card
               class="card shadow"
               [product]="product"
-              (favorite)="changeFavorite($event, product)"
+              (favorite)="changeMyFavorite($event, product)"
               *ngFor="let product of productsFavorites"
 
             >

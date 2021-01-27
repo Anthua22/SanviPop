@@ -99,4 +99,17 @@ export class ProductsService {
       map(x=>x.product)
     );
   }
+
+  getUserProducts(idUser:number):Observable<Product[]>{
+    return this.http.get<ProductsResponse>(`products/user/${idUser}`).pipe(map(x=>x.products));
+  }
+
+  getUserProductsBought(idUser:number):Observable<Product[]>{
+    return this.http.get<ProductsResponse>(`products/user/${idUser}/bought`).pipe(map(x=>x.products));
+  }
+
+  getUserProductsSold(idUser:number):Observable<Product[]>{
+    return this.http.get<ProductsResponse>(`products/user/${idUser}/sold`).pipe(map(x=>x.products));
+  }
+
 }

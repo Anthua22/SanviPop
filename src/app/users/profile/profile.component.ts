@@ -17,38 +17,56 @@ export class ProfileComponent implements OnInit {
   productsFavorites!: Product[];
   myProducts!: Product[];
   productsSolds!: Product[];
-  productsBought!:Product[];
+  productsBought!: Product[];
 
-  constructor(private route: ActivatedRoute,  private productService: ProductsService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
       x => this.user = x.user
     );
-    this.productService.getMyProducts().subscribe(x => this.myProducts = x,
-      err => console.error(err));
-    this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
-    this.productService.getBookMarked().subscribe(x=>this.productsFavorites=x);
-    this.productService.getMyProductsBought().subscribe(x=>this.productsBought=x);
+
+    if (this.user.me) {
+      this.productService.getMyProducts().subscribe(x => this.myProducts = x,
+        err => console.error(err));
+      this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
+      this.productService.getBookMarked().subscribe(x => this.productsFavorites = x);
+      this.productService.getMyProductsBought().subscribe(x => this.productsBought = x);
+    } else {
+      this.productService.getUserProducts(this.user.id!).subscribe(x => this.myProducts = x,
+        err => console.error(err));
+      this.productService.getUserProductsSold(this.user.id!).subscribe(x => this.productsSolds = x);
+      this.productService.getUserProductsBought(this.user.id!).subscribe(x => this.productsBought = x);
+    }
+  }
+
+  changeFavorite(element: HTMLElement): void {
+    if (element.children[0].classList.contains('far')) {
+      element.children[0].classList.remove('far');
+      element.children[0].classList.add('fas');
+    } else {
+      element.children[0].classList.add('far');
+      element.children[0].classList.remove('fas');
+    }
   }
 
   deleteProduct(product: Product) {
     console.log(product)
     this.myProducts = this.myProducts.filter(p => p !== product);
   }
-  changeFavorite(element: HTMLElement, product:Product): void {
-    this.productsFavorites = this.productsFavorites.filter(x=>product!=x);
+  changeMyFavorite(element: HTMLElement, product: Product): void {
+    this.productsFavorites = this.productsFavorites.filter(x => product != x);
     if (element.children[0].classList.contains('far')) {
       element.children[0].classList.remove('far');
       element.children[0].classList.add('fas');
-    }else{
+    } else {
       element.children[0].classList.add('far');
       element.children[0].classList.remove('fas');
     }
 
   }
 
-  changeListFavorites(product:Product){
-    this.productsFavorites.filter(x=>x!=product);
+  changeListFavorites(product: Product) {
+    this.productsFavorites.filter(x => x != product);
   }
 }
