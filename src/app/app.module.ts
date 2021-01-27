@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -43,7 +45,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       production:'',
       environment:'sandbox'
     }),
-    NgbModule
+    BrowserAnimationsModule
+
   ],
   providers: [
     {

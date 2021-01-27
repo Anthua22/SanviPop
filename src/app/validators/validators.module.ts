@@ -12,7 +12,8 @@ import { MatchEmailDirective } from './match-email.directive';
     CommonModule
   ],
   exports: [
-    PositiveValueDirective
+    PositiveValueDirective,
+    MatchEmailDirective
   ]
 })
 export class ValidatorsModule { }

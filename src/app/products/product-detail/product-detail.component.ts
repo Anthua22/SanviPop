@@ -34,6 +34,8 @@ export class ProductDetailComponent implements OnInit {
         this.errorSwal.fire();
       }
     );
+
+
   }
 
 

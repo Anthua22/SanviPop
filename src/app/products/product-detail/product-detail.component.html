@@ -10,49 +10,46 @@
   </ng-container>
 </swal>
 
-<ngb-carousel *ngIf="product.photos" class="mt-4 mb-4">
+<div class="container">
+  <ngb-carousel *ngIf="product.photos!.length > 1" class="mt-4 mb-4">
+    <ng-template ngbSlide *ngFor="let photo of product.photos">
+      <div class="picsum-img-wrapper">
+        <img [src]="photo.url" [alt]="photo.id" />
+      </div>
+    </ng-template>
+  </ngb-carousel>
 
-  <ng-template ngbSlide  *ngFor="let photo of product.photos">
-    <div class="picsum-img-wrapper">
-      <img [src]="photo.url" [alt]="photo.id" />
-    </div>
+  <sp-product-card
+    #productcard
+    class="card mt-4 shadow"
+    [product]="product"
+    (deleted)="goBack()"
+    (favorite)="changeFavorite($event)"
+  ></sp-product-card>
 
-  </ng-template>
-</ngb-carousel>
+  <div
+    *ngIf="!product.mine"
+    class="row justify-content-center btn btn-success buy"
+  >
+    <h4 class="col-2">Buy</h4>
+    <sp-paypal-button
+      class="col-4"
+      id="product"
+      [amount]="product.price"
+      (paymentCompleted)="getPayment($event)"
+    ></sp-paypal-button>
+  </div>
 
-<sp-product-card
-  #productcard
-  class="card mt-4 shadow"
-  [product]="product"
-  (deleted)="goBack()"
-  (favorite)="changeFavorite($event)"
-></sp-product-card>
-
-<div
-  *ngIf="!product.mine"
-  class="row justify-content-center btn btn-success buy"
->
-  <h4 class="col-2">Buy</h4>
-  <sp-paypal-button
-    class="col-4"
-    id="product"
-    [amount]="product.price"
-    (paymentCompleted)="getPayment($event)"
-  ></sp-paypal-button>
-</div>
-
-
-
-<mgl-map
-  [style]="'mapbox://styles/mapbox/streets-v11'"
-  [zoom]="[17]"
-  [center]="[product.owner!.lng!, product.owner!.lat!]"
->
-  <mgl-marker
-    [lngLat]="[product.owner!.lng!, product.owner!.lat!]"
-  ></mgl-marker>
-</mgl-map>
-<div class="mt-4 mb-4">
-
-  <button class="btn btn-success" (click)="goBack()">Go back</button>
+  <mgl-map
+    [style]="'mapbox://styles/mapbox/streets-v11'"
+    [zoom]="[17]"
+    [center]="[product.owner!.lng!, product.owner!.lat!]"
+  >
+    <mgl-marker
+      [lngLat]="[product.owner!.lng!, product.owner!.lat!]"
+    ></mgl-marker>
+  </mgl-map>
+  <div class="mt-4 mb-4">
+    <button class="btn btn-success" (click)="goBack()">Go back</button>
+  </div>
 </div>

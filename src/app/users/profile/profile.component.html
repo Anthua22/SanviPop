@@ -1,85 +1,85 @@
-<div class="col-3">
-  <img class="w-100" id="avatar" [src]="user.photo" alt="" />
-</div>
-<div class="col-9">
-  <h4>{{ user.name }}</h4>
-  <h4>
-    <small class="text-muted">{{ user.email }}</small>
-  </h4>
-
-  <p *ngIf="user.me">
-    <a [routerLink]="['/users/edit']" class="btn btn-primary">Edit profile</a>
-  </p>
-
-  <div>
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-      <li [ngbNavItem]="1">
-        <a ngbNavLink>Products Selling</a>
-        <ng-template ngbNavContent>
-          <div class="card-columns mt-4 mb-4">
-            <sp-product-card
-              class="card shadow"
-              [product]="product"
-              (deleted)="deleteProduct(product)"
-              (favorite)="changeFavorite($event)"
-              *ngFor="let product of myProducts"
-            >
-            </sp-product-card>
-          </div>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="2" *ngIf="user.me">
-        <a ngbNavLink>Products Favorites</a>
-        <ng-template ngbNavContent>
-          <div class="card-columns mt-4 mb-4">
-            <sp-product-card
-              class="card shadow"
-              [product]="product"
-              (favorite)="changeMyFavorite($event, product)"
-              *ngFor="let product of productsFavorites"
-
-            >
-            </sp-product-card>
-          </div>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="3">
-        <a ngbNavLink>Products Solds</a>
-        <ng-template ngbNavContent>
-          <div class="card-columns mt-4 mb-4">
-            <sp-product-card
-              class="card shadow"
-              [product]="product"
-              (deleted)="deleteProduct(product)"
-
-              *ngFor="let product of productsSolds"
-            >
-            </sp-product-card>
-          </div>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="4">
-        <a ngbNavLink>Products Bought</a>
-        <ng-template ngbNavContent>
-          <div class="card-columns mt-4 mb-4">
-            <sp-product-card
-              class="card shadow"
-              [product]="product"
-              *ngFor="let product of productsBought"
-            >
-            </sp-product-card>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="nav"></div>
+<div class="container">
+  <div class="col-3">
+    <img class="w-100" id="avatar" [src]="user.photo" alt="" />
   </div>
+  <div class="col-9">
+    <h4>{{ user.name }}</h4>
+    <h4>
+      <small class="text-muted">{{ user.email }}</small>
+    </h4>
 
-  <mgl-map
-    [style]="'mapbox://styles/mapbox/streets-v11'"
-    [zoom]="[17]"
-    [center]="[user.lng!, user.lat!]"
-  >
-    <mgl-marker [lngLat]="[user.lng!, user.lat!]"></mgl-marker>
-  </mgl-map>
+    <p *ngIf="user.me">
+      <a [routerLink]="['/users/edit']" class="btn btn-primary">Edit profile</a>
+    </p>
+
+    <div>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Products Selling</a>
+          <ng-template ngbNavContent>
+            <div class="card-columns mt-4 mb-4">
+              <sp-product-card
+                class="card shadow"
+                [product]="product"
+                (deleted)="deleteProduct(product)"
+                (favorite)="changeFavorite($event)"
+                *ngFor="let product of myProducts"
+              >
+              </sp-product-card>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2" *ngIf="user.me">
+          <a ngbNavLink>Products Favorites</a>
+          <ng-template ngbNavContent>
+            <div class="card-columns mt-4 mb-4">
+              <sp-product-card
+                class="card shadow"
+                [product]="product"
+                (favorite)="changeMyFavorite($event, product)"
+                *ngFor="let product of productsFavorites"
+              >
+              </sp-product-card>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Products Solds</a>
+          <ng-template ngbNavContent>
+            <div class="card-columns mt-4 mb-4">
+              <sp-product-card
+                class="card shadow"
+                [product]="product"
+                (deleted)="deleteProduct(product)"
+                *ngFor="let product of productsSolds"
+              >
+              </sp-product-card>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="4">
+          <a ngbNavLink>Products Bought</a>
+          <ng-template ngbNavContent>
+            <div class="card-columns mt-4 mb-4">
+              <sp-product-card
+                class="card shadow"
+                [product]="product"
+                *ngFor="let product of productsBought"
+              >
+              </sp-product-card>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
+
+    <mgl-map
+      [style]="'mapbox://styles/mapbox/streets-v11'"
+      [zoom]="[17]"
+      [center]="[user.lng!, user.lat!]"
+    >
+      <mgl-marker [lngLat]="[user.lng!, user.lat!]"></mgl-marker>
+    </mgl-map>
+  </div>
 </div>

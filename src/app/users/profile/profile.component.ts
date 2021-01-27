@@ -25,12 +25,14 @@ export class ProfileComponent implements OnInit {
     this.route.data.subscribe(
       x => this.user = x.user
     );
-
     if (this.user.me) {
       this.productService.getMyProducts().subscribe(x => this.myProducts = x,
         err => console.error(err));
       this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
-      this.productService.getBookMarked().subscribe(x => this.productsFavorites = x);
+      this.productService.getBookMarked().subscribe(x => {
+        this.productsFavorites = x;
+        this.productsFavorites = this.productsFavorites.filter(x=>x.status!=3)
+      });
       this.productService.getMyProductsBought().subscribe(x => this.productsBought = x);
     } else {
       this.productService.getUserProducts(this.user.id!).subscribe(x => this.myProducts = x,
@@ -51,9 +53,9 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    console.log(product)
     this.myProducts = this.myProducts.filter(p => p !== product);
   }
+
   changeMyFavorite(element: HTMLElement, product: Product): void {
     this.productsFavorites = this.productsFavorites.filter(x => product != x);
     if (element.children[0].classList.contains('far')) {

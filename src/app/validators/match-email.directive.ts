@@ -1,6 +1,7 @@
-import { Directive } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
+import { AbstractControl, FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { User } from '../users/interfaces/user';
+
 
 @Directive({
   selector: '[spMatchEmail]',
@@ -8,18 +9,16 @@ import { User } from '../users/interfaces/user';
 })
 export class MatchEmailDirective implements Validator {
 
-
-
-  user!: User;
   constructor() {
 
   }
 
-  validate(othercontrol: AbstractControl): ValidationErrors | null {
-    if (othercontrol) {
-      return (control: AbstractControl) => {
-        othercontrol.value === control.value ? { matchEmail: true } : null
-      };
+
+  validate(group: FormGroup): { [key: string]: any } | null {
+    if (group instanceof FormGroup) {
+      if (Object.values(group.value) && group.value.email !== group.value.email2) {
+        return { matchValue: true };
+      }
     }
 
     return null;

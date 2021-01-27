@@ -14,7 +14,9 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: ProductsPageComponent
+    component: ProductsPageComponent,
+    data: { animation: 'productList' }
+
   },
   {
     path: 'add',
@@ -45,7 +47,8 @@ const routes: Routes = [
     canActivate: [NumericIdGuard],
     resolve: {
       product: ProductResolver
-    }
+    },
+    data: { animation: 'productDetail' },
   },
 ];
 

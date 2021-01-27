@@ -1,11 +1,24 @@
-<nav class="navbar navbar-light bg-light justify-content-between mt-4">
-  <form class="form mb-0 w-100">
-    <input class="form-control" type="text" name="search" [(ngModel)]="search"
-      placeholder="Search" aria-label="Search"/>
-  </form>
-</nav>
-<div class="card-columns mt-4 mb-4">
-  <sp-product-card class="card shadow" [product]="product" (favorite)="changeFavorite($event)" (deleted)="deleteProduct(product)"
-    *ngFor="let product of products | productsFilter:search">
-  </sp-product-card>
+<div class="container">
+  <nav class="navbar navbar-light bg-light justify-content-between mt-4">
+    <form class="form mb-0 w-100">
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
+  </nav>
+  <div class="card-columns mt-4 mb-4">
+    <sp-product-card
+      class="card shadow"
+      [product]="product"
+      (favorite)="changeFavorite($event)"
+      (deleted)="deleteProduct(product)"
+      *ngFor="let product of products | productsFilter: search"
+    >
+    </sp-product-card>
+  </div>
 </div>

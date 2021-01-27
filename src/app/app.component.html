@@ -1,6 +1,6 @@
 <sp-menu-top></sp-menu-top>
 
-<div class="container">
-  <router-outlet></router-outlet>
+<div [@routeAnimation]="getState(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
 
 </div>

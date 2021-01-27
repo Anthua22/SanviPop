@@ -16,12 +16,10 @@ export class UserResolver implements Resolve<User> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Observable<never> {
     let urlpartfinal:UrlSegment = route.url[route.url.length-1];
-
-
     return route.params.id || urlpartfinal.path==='me' ?this.userService.getProfile(route.params.id).pipe(
       catchError(() => {
         this.router.navigate(['/products']);
-        return this.userService.getProfile();
+          return NEVER;
       })
     ):this.userService.getProfile();
 

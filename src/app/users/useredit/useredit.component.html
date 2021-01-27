@@ -1,101 +1,118 @@
 <swal icon="success" title="Update" #updateProfileSwal>
   <ng-container *swalPortal="swalTargets.content">
-    {{message}}
+    {{ message }}
   </ng-container>
 </swal>
 
 <swal icon="error" title="Erro" #errorSwal>
   <ng-container *swalPortal="swalTargets.content">
-    {{message}}
+    {{ message }}
   </ng-container>
 </swal>
-<form
-  class="mt-4"
-  (ngSubmit)="updateProfile()"
-  method="POST"
-  role="form"
-  #userForm="ngForm"
->
-  <legend>Edit profile</legend>
-  <div class="form-group">
-    <label for="correo">Email:</label>
-    <input
-      type="email"
-      class="form-control"
-      name="email"
-      id="email"
-      [(ngModel)]="user.email"
-      placeholder="Email"
-    />
-    <label for="name">Name:</label>
-    <input
-      type="text"
-      class="form-control"
-      name="nameUser"
-      id="name"
-      [(ngModel)]="user.name"
-      placeholder="Name"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary">Edit profile</button>
-</form>
-<form
-  (ngSubmit)="updatePhoto(imgPreview)"
-  class="mt-4"
-  method="POST"
-  role="form"
-  #userPhoto="ngForm"
->
-  <legend>Edit photo</legend>
 
-  <div class="form-group">
-    <input
-      type="file"
-      class="form-control"
-      id="image"
-      #fileImage
-      (change)="changeImage(fileImage, imgPreview)"
-      name="image"
-      [(ngModel)]="photoFile"
-    />
-  </div>
-  <div class="row">
-    <div class="col">
-      <img class="imgwidth" id="photo" [src]="user.photo" alt="" />
+<div class="container">
+  <form
+    class="mt-4"
+    (ngSubmit)="updateProfile()"
+    method="POST"
+    role="form"
+    #userForm="ngForm"
+  >
+    <legend>Edit profile</legend>
+    <div class="form-group">
+      <label for="correo">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        [(ngModel)]="user.email"
+        placeholder="Email"
+      />
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="nameUser"
+        id="name"
+        [(ngModel)]="user.name"
+        placeholder="Name"
+      />
     </div>
-    <div class="col">
-      <img class="d-none imgwidth" #imgPreview src="" alt="" id="imgPreview" />
+    <button type="submit" class="btn btn-primary">Edit profile</button>
+  </form>
+  <form
+    (ngSubmit)="updatePhoto(imgPreview)"
+    class="mt-4"
+    method="POST"
+    role="form"
+    #userPhoto="ngForm"
+  >
+    <legend>Edit photo</legend>
+
+    <div class="form-group">
+      <input
+        type="file"
+        class="form-control"
+        id="image"
+        #fileImage
+        (change)="changeImage(fileImage, imgPreview)"
+        name="image"
+        [(ngModel)]="photoFile"
+      />
     </div>
-  </div>
-  <p class="text-danger" id="errorInfo2"></p>
-  <p class="text-success" id="okInfo2"></p>
+    <div class="row">
+      <div class="col">
+        <img class="imgwidth" id="photo" [src]="user.photo" alt="" />
+      </div>
+      <div class="col">
+        <img
+          class="d-none imgwidth"
+          #imgPreview
+          src=""
+          alt=""
+          id="imgPreview"
+        />
+      </div>
+    </div>
+    <p class="text-danger" id="errorInfo2"></p>
+    <p class="text-success" id="okInfo2"></p>
 
-  <button type="submit" class="btn btn-primary">Edit photo</button>
-</form>
-<form action="#" (ngSubmit)="updatePassword()" id="form-password" class="mt-4" method="POST" role="form"  #userPassword="ngForm">
-  <legend>Edit password</legend>
+    <button type="submit" class="btn btn-primary">Edit photo</button>
+  </form>
+  <form
+    action="#"
+    (ngSubmit)="updatePassword()"
+    id="form-password"
+    class="mt-4"
+    method="POST"
+    role="form"
+    #userPassword="ngForm"
+  >
+    <legend>Edit password</legend>
 
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      class="form-control"
-      name="password"
-      id="password"
-      [(ngModel)]="password"
-      placeholder="Password"
-    />
-    <label for="password2">Repeat password:</label>
-    <input
-      type="password"
-      class="form-control"
-      name="password2"
-      id="password2"
-      [(ngModel)]="passwordconfirm"
-      placeholder="Repeat password"
-    />
-  </div>
-  <p class="text-danger" id="errorInfo3"></p>
-  <p class="text-success" id="okInfo3"></p>
-  <button type="submit" class="btn btn-primary">Edit password</button>
-</form>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password"
+        [(ngModel)]="password"
+        placeholder="Password"
+      />
+      <label for="password2">Repeat password:</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password2"
+        id="password2"
+        [(ngModel)]="passwordconfirm"
+        placeholder="Repeat password"
+      />
+    </div>
+    <p class="text-danger" id="errorInfo3"></p>
+    <p class="text-success" id="okInfo3"></p>
+    <button type="submit" class="btn btn-primary">Edit password</button>
+  </form>
+</div>
