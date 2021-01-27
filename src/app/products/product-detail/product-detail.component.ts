@@ -22,7 +22,7 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public readonly swalTargets: SwalPortalTargets,
-    private productsService:ProductsService
+    private productsService: ProductsService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +50,17 @@ export class ProductDetailComponent implements OnInit {
           this.buySwal.fire();
         }
       );
+    }
+
+  }
+
+  changeFavorite(element: HTMLElement): void {
+    if (element.children[0].classList.contains('far')) {
+      element.children[0].classList.remove('far');
+      element.children[0].classList.add('fas');
+    } else {
+      element.children[0].classList.add('far');
+      element.children[0].classList.remove('fas');
     }
 
   }

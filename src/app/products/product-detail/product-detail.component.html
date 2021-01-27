@@ -15,18 +15,20 @@
   class="card mt-4 shadow"
   [product]="product"
   (deleted)="goBack()"
+  (favorite)="changeFavorite($event)"
 ></sp-product-card>
 
-<sp-paypal-button
-  class="center"
-  *ngIf="!product.mine"
-  id="product"
-  [amount]="product.price"
-  (paymentCompleted)="getPayment($event)"
-  >></sp-paypal-button
->
+<div class="row justify-content-center btn btn-success buy">
+  <h4 class="col-2">Buy</h4>
+  <sp-paypal-button
+    class="col-4"
+    *ngIf="!product.mine"
+    id="product"
+    [amount]="product.price"
+    (paymentCompleted)="getPayment($event)"
+  ></sp-paypal-button>
+</div>
 
-<!--
 <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
   [zoom]="[17]"
@@ -35,7 +37,7 @@
   <mgl-marker
     [lngLat]="[product.owner!.lng!, product.owner!.lat!]"
   ></mgl-marker>
-</mgl-map>-->
+</mgl-map>
 <div class="mt-4 mb-4">
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>
