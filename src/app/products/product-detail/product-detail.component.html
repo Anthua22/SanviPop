@@ -10,6 +10,16 @@
   </ng-container>
 </swal>
 
+<ngb-carousel *ngIf="product.photos" class="mt-4 mb-4">
+
+  <ng-template ngbSlide  *ngFor="let photo of product.photos">
+    <div class="picsum-img-wrapper">
+      <img [src]="photo.url" [alt]="photo.id" />
+    </div>
+
+  </ng-template>
+</ngb-carousel>
+
 <sp-product-card
   #productcard
   class="card mt-4 shadow"
@@ -31,15 +41,7 @@
   ></sp-paypal-button>
 </div>
 
-<ngb-carousel *ngIf="product.photos" class="mt-4 mb-4">
 
-  <ng-template ngbSlide  *ngFor="let photo of product.photos">
-    <div class="picsum-img-wrapper">
-      <img [src]="photo.url" [alt]="photo.id" />
-    </div>
-
-  </ng-template>
-</ngb-carousel>
 
 <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
@@ -51,11 +53,6 @@
   ></mgl-marker>
 </mgl-map>
 <div class="mt-4 mb-4">
-  <a
-    class="btn btn-primary mr-2"
-    *ngIf="product.mine"
-    [routerLink]="['/products', product.id, 'photos']"
-    >Photos</a
-  >
+
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>

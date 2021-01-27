@@ -4,6 +4,7 @@ import { EditproductGuard } from '../guards/editproduct.guard';
 import { LoginactivateguardGuard } from '../guards/loginactivateguard.guard';
 import { NumericIdGuard } from '../guards/numeric-id.guard';
 import { PageLeaveGuard } from '../guards/page-leave.guard';
+import { PhotoproductResolver } from '../resolvers/photoproduct.resolver';
 import { ProductResolver } from '../resolvers/product.resolver';
 import { PhotosproductComponent } from './photosproduct/photosproduct.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -26,7 +27,7 @@ const routes: Routes = [
     component:PhotosproductComponent,
     canActivate:[NumericIdGuard],
     resolve:{
-      product:ProductResolver
+      product:PhotoproductResolver
     }
   },
   {

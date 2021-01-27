@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   Router, Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot,
-  UrlSegment
+  ActivatedRouteSnapshot
 } from '@angular/router';
 import { NEVER, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -13,27 +12,22 @@ import { ProductsService } from '../products/services/products.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductResolver implements Resolve<Product> {
+export class PhotoproductResolver implements Resolve<Product> {
   constructor(private productsService: ProductsService, private router: Router) { }
 
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<Product> | Observable<never> {
-    let urledit: UrlSegment = route.url[route.url.length - 2];
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> | Observable<never> {
 
     return this.productsService.getProduct(route.params.id).pipe(map(x => {
-      if (urledit && urledit.path === 'edit' && !x.mine) {
-        this.router.navigate(['/products/add']);
-
+      if (!x.mine) {
+        this.router.navigate(['/products']);
       }
       return x;
-    }), catchError(error => {
-
-      this.router.navigate(['/products/add']);
+    }), catchError(err => {
+      this.router.navigate(['products']);
       return NEVER;
-    }))
-  };
+    }));
+  }
+
 
 
 }
