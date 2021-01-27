@@ -36,7 +36,68 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
             animate('0.5s', style({ transform: 'none' })),
           ]),
         ])
+      ]),
+      transition('userProfile => userEditProfile',[
+        query(':enter, :leave', style({ position: 'absolute',  width:'100%' })),
+        query(':enter', style({ transform: 'translateY(100%)' })),
+        group([
+          query(':leave', [
+            animate('0.5s', style({ transform: 'translateY(-100%)' })),
+          ]),
+          query(':enter', [
+            animate('0.5s', style({ transform: 'none' })),
+          ]),
+        ])
+      ]),
+      transition('userEditProfile => userProfile',[
+        query(':enter, :leave', style({ position: 'absolute', width:'100%' })),
+        query(':enter', style({ transform: 'translateY(-100%)' })),
+        group([
+          query(':leave', [
+            animate('0.5s', style({ transform: 'translateY(100%)' })),
+          ]),
+          query(':enter', [
+            animate('0.5s', style({ transform: 'none' })),
+          ]),
+        ])
+      ]),
+      transition('productList => productEdit',[
+        query(':enter, :leave', style({ position: 'absolute', width: '100%' })),
+        query(':enter', style({ transform: 'translateX(100%)' })),
+        group([
+          query(':leave', [
+            animate('0.5s', style({ transform: 'translateX(-100%)' })),
+          ]),
+          query(':enter', [
+            animate('0.5s', style({ transform: 'none' })),
+          ]),
+        ])
+      ]),
+      transition('productEdit => productList', [
+        query(':enter, :leave', style({ position: 'absolute', width: '100%' })),
+        query(':enter', style({ transform: 'translateX(-100%)' })),
+        group([
+          query(':leave', [
+            animate('0.5s', style({ transform: 'translateX(100%)' })),
+          ]),
+          query(':enter', [
+            animate('0.5s', style({ transform: 'none' })),
+          ]),
+        ])
+      ]),
+      transition('productEdit => productPhotos',[
+        query(':enter, :leave', style({ position: 'absolute',  width:'100%' })),
+        query(':enter', style({ transform: 'translateY(100%)' })),
+        group([
+          query(':leave', [
+            animate('0.5s', style({ transform: 'translateY(-100%)' })),
+          ]),
+          query(':enter', [
+            animate('0.5s', style({ transform: 'none' })),
+          ]),
+        ])
       ])
+
     ])
   ]
 })

@@ -13,14 +13,16 @@ const routes: Routes = [
     component: ProfileComponent,
     resolve: {
       user: UserResolver
-    }
+    },
+    data: { animation: 'userProfile' }
   },
   {
     path: 'edit',
     component: UsereditComponent,
     resolve: {
       user: UserResolver
-    }
+    },
+    data: { animation: 'userEditProfile' }
   },
   {
     path: ':id',

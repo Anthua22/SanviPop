@@ -30,7 +30,8 @@ const routes: Routes = [
     canActivate:[NumericIdGuard],
     resolve:{
       product:PhotoproductResolver
-    }
+    },
+    data: { animation: 'productPhotos' }
   },
   {
     path:'edit/:id',
@@ -39,7 +40,8 @@ const routes: Routes = [
     canDeactivate:[EditproductGuard],
     resolve:{
       product:ProductResolver
-    }
+    },
+    data: { animation: 'productEdit' }
   },
   {
     path: ':id',
@@ -48,7 +50,7 @@ const routes: Routes = [
     resolve: {
       product: ProductResolver
     },
-    data: { animation: 'productDetail' },
+    data: { animation: 'productDetail' }
   },
 ];
 
