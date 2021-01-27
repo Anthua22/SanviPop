@@ -18,7 +18,10 @@
   (favorite)="changeFavorite($event)"
 ></sp-product-card>
 
-<div  *ngIf="!product.mine" class="row justify-content-center btn btn-success buy">
+<div
+  *ngIf="!product.mine"
+  class="row justify-content-center btn btn-success buy"
+>
   <h4 class="col-2">Buy</h4>
   <sp-paypal-button
     class="col-4"
@@ -27,6 +30,16 @@
     (paymentCompleted)="getPayment($event)"
   ></sp-paypal-button>
 </div>
+
+<ngb-carousel *ngIf="product.photos" class="mt-4 mb-4">
+
+  <ng-template ngbSlide  *ngFor="let photo of product.photos">
+    <div class="picsum-img-wrapper">
+      <img [src]="photo.url" [alt]="photo.id" />
+    </div>
+
+  </ng-template>
+</ngb-carousel>
 
 <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
@@ -38,6 +51,11 @@
   ></mgl-marker>
 </mgl-map>
 <div class="mt-4 mb-4">
-  <a class="btn btn-primary mr-2" *ngIf="product.mine" [routerLink]="['/products',product.id,'photos']">Add Photo</a>
+  <a
+    class="btn btn-primary mr-2"
+    *ngIf="product.mine"
+    [routerLink]="['/products', product.id, 'photos']"
+    >Photos</a
+  >
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>

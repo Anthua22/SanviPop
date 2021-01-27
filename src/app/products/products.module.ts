@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaypalButtonModule } from '../paypal-button/paypal-button.module';
 import { PaypalButtonComponent } from '../paypal-button/paypal-button/paypal-button.component';
 import { PhotosproductComponent } from './photosproduct/photosproduct.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { PhotosproductComponent } from './photosproduct/photosproduct.component'
     NgxMapboxGLModule,
     SweetAlert2Module,
     FontAwesomeModule,
-    PaypalButtonModule
+    PaypalButtonModule,
+    NgbCarouselModule
 
   ],
   exports:[
