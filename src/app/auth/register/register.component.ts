@@ -69,7 +69,8 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/auth/login']);
       },
       err=>{
-
+        this.message = err;
+        this.errorSwal.fire();
       }
     )
   }

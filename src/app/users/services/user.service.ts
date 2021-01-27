@@ -20,7 +20,8 @@ export class UserService {
     }), catchError((resp: HttpErrorResponse) => throwError(`Error Getting User. Status: ${resp.status}. Message: ${resp.message}`)))
     : this.http.get<UserResponse>('users/me').pipe(map(x => {
       return x.user;
-    }), catchError((resp: HttpErrorResponse) => throwError(`Error Gettting User. Status: ${resp.status}. Message: ${resp.message}`)));
+    }), catchError((resp: HttpErrorResponse) => throwError(`Error Gettting User. Status:
+    ${resp.status}. Message: ${resp.message}`)));
   }
 
   updateProfile(name: string, email: string): Observable<void> {
@@ -42,7 +43,8 @@ export class UserService {
       x => {
         return;
       }
-    ), catchError((resp: HttpErrorResponse) => throwError(`Error Update password. Status: ${resp.status}. Message: ${resp.message}`)))
+    ), catchError((resp: HttpErrorResponse) => throwError(`Error Update password. Status: ${resp.status}. Message: ${resp.message}`))
+    )
   }
 
 

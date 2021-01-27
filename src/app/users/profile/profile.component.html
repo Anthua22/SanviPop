@@ -75,7 +75,6 @@
   </div>
 
   <mgl-map
-    *ngIf="!user.me"
     [style]="'mapbox://styles/mapbox/streets-v11'"
     [zoom]="[17]"
     [center]="[user.lng!, user.lat!]"

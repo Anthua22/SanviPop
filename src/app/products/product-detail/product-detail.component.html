@@ -18,11 +18,10 @@
   (favorite)="changeFavorite($event)"
 ></sp-product-card>
 
-<div class="row justify-content-center btn btn-success buy">
+<div  *ngIf="!product.mine" class="row justify-content-center btn btn-success buy">
   <h4 class="col-2">Buy</h4>
   <sp-paypal-button
     class="col-4"
-    *ngIf="!product.mine"
     id="product"
     [amount]="product.price"
     (paymentCompleted)="getPayment($event)"

@@ -1,3 +1,8 @@
+<swal icon="error" title="Error" #errorSwal>
+  <ng-container *swalPortal="swalTargets.content">
+    {{ message }}
+  </ng-container>
+</swal>
 <div class="container">
   <form
     action="#"
@@ -59,7 +64,12 @@
     <a class="btn btn-secondary" [routerLink]="['/auth/register']" role="button"
       >Create account</a
     >
-    <button type="submit" class="btn btn-primary" (click)="login()" [disabled]="prodForm.invalid">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="login()"
+      [disabled]="prodForm.invalid"
+    >
       Login
     </button>
     <button

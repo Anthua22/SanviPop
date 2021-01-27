@@ -125,7 +125,6 @@
         type="text"
         class="form-control"
         id="lat"
-        spPositiveValue
         name="lat"
         [(ngModel)]="newUser.lat"
         placeholder="Geolocating..."
@@ -139,7 +138,6 @@
         class="form-control"
         id="lng"
         name="lng"
-        spPositiveValue
         [(ngModel)]="newUser.lng"
         placeholder="Geolocating..."
         readonly
@@ -163,8 +161,11 @@
         'is-invalid': photoModel.touched && photoModel.invalid
       }"
     />
+
     <div class="invalid-feedback">Photo is required</div>
   </div>
+
+
   <img [src]="newUser.photo" alt="" id="imgPreview" class="img-thumbnail" />
   <a class="btn btn-secondary" [routerLink]="['/auth/login']" role="button"
     >Go back</a

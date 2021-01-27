@@ -5,6 +5,7 @@ import { LoginactivateguardGuard } from '../guards/loginactivateguard.guard';
 import { NumericIdGuard } from '../guards/numeric-id.guard';
 import { PageLeaveGuard } from '../guards/page-leave.guard';
 import { ProductResolver } from '../resolvers/product.resolver';
+import { PhotosproductComponent } from './photosproduct/photosproduct.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
@@ -21,8 +22,12 @@ const routes: Routes = [
 
   },
   {
-    path:'mine',
-    component:ProductsPageComponent
+    path:':id/photos',
+    component:PhotosproductComponent,
+    canActivate:[NumericIdGuard],
+    resolve:{
+      product:ProductResolver
+    }
   },
   {
     path:'edit/:id',
