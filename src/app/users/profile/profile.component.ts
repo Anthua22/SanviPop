@@ -17,8 +17,9 @@ export class ProfileComponent implements OnInit {
   productsFavorites!: Product[];
   myProducts!: Product[];
   productsSolds!: Product[];
-  public readonly nav!: NgbNav;
-  constructor(private route: ActivatedRoute, private ngZone: NgZone, private productService: ProductsService) { }
+  productsBought!:Product[];
+
+  constructor(private route: ActivatedRoute,  private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
       err => console.error(err));
     this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
     this.productService.getBookMarked().subscribe(x=>this.productsFavorites=x);
-
+    this.productService.getMyProductsBought().subscribe(x=>this.productsBought=x);
   }
 
   deleteProduct(product: Product) {

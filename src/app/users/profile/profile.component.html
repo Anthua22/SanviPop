@@ -57,6 +57,19 @@
           </div>
         </ng-template>
       </li>
+      <li [ngbNavItem]="4">
+        <a ngbNavLink>Products Bought</a>
+        <ng-template ngbNavContent>
+          <div class="card-columns mt-4 mb-4">
+            <sp-product-card
+              class="card shadow"
+              [product]="product"
+              *ngFor="let product of productsBought"
+            >
+            </sp-product-card>
+          </div>
+        </ng-template>
+      </li>
     </ul>
     <div [ngbNavOutlet]="nav"></div>
   </div>
