@@ -14,11 +14,11 @@ interface ProductBase {
   numVisits?: number;
   category: number | Category;
   mine?: boolean;
-  photos?: Photo;
+  photos?: Photo[];
   datePublished?: string;
   distance?: number;
   status?:number;
-  favorite?:boolean
+  favorite?:boolean,
 
 }
 

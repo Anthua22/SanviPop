@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { Photo } from '../interfaces/photo';
 import { Product, ProductAdd } from '../interfaces/product';
+import { PhotoProductResponse } from '../interfaces/responses/photo-response';
 import { ProductResponse } from '../interfaces/responses/product-response';
 import { ProductsResponse } from '../interfaces/responses/products-response';
 
@@ -79,5 +82,21 @@ export class ProductsService {
 
   deleteFavorite(id:number):Observable<void>{
     return this.http.delete<void>(`products/${id}/bookmarks`).pipe();
+  }
+
+  addPhotoProduct(photo:string, id:number):Observable<Photo>{
+    return this.http.post<PhotoProductResponse>(`products/${id}/photos`,{photo}).pipe(
+      map(x=>x.photo)
+    );
+  }
+
+  deletePhoto(photo:Photo, idProduct:number):Observable<void>{
+    return this.http.delete<void>(`products/${idProduct}/photos/${photo.id}`)
+  }
+
+  updateMainPhoto(idProduct:number, idPhoto:number):Observable<Product>{
+    return this.http.put<ProductResponse>(`products/${idProduct}`,{maintPhoto:idPhoto}).pipe(
+      map(x=>x.product)
+    );
   }
 }

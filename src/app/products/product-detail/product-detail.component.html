@@ -38,5 +38,6 @@
   ></mgl-marker>
 </mgl-map>
 <div class="mt-4 mb-4">
+  <a class="btn btn-primary mr-2" *ngIf="product.mine" [routerLink]="['/products',product.id,'photos']">Add Photo</a>
   <button class="btn btn-success" (click)="goBack()">Go back</button>
 </div>
