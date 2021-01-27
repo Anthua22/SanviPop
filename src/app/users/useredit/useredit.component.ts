@@ -54,22 +54,25 @@ export class UsereditComponent implements OnInit {
   }
 
   updatePhoto(imgPreview: HTMLImageElement): void {
-    this.user.photo = imgPreview.src;
-    this.userService.updateAvatar(this.user.photo!).subscribe(
-      x => {
-        imgPreview.classList.add('d-none');
-        this.user.photo = x;
-        this.photoFile = '';
-        this.title = 'Photo Update';
-        this.message = 'Profile picture has been successfully changed';
-        this.componentSwal.fire();
-      },
-      err => {
-        this.title = "Error Update Photo";
-        this.message = err;
-        this.errorSwal.fire();
-      }
-    )
+    if (imgPreview.src&&imgPreview.src !== '') {
+      this.user.photo = imgPreview.src;
+      this.userService.updateAvatar(this.user.photo!).subscribe(
+        x => {
+          imgPreview.classList.add('d-none');
+          this.user.photo = x;
+          this.photoFile = '';
+          this.title = 'Photo Update';
+          this.message = 'Profile picture has been successfully changed';
+          this.componentSwal.fire();
+        },
+        err => {
+          this.title = "Error Update Photo";
+          this.message = err;
+          this.errorSwal.fire();
+        }
+      )
+    }
+
   }
 
   updatePassword(): void {
@@ -79,8 +82,8 @@ export class UsereditComponent implements OnInit {
         x => {
           this.title = "Password Update";
           this.message = 'The password has changed update successfull';
-          this.password='';
-          this.passwordconfirm='';
+          this.password = '';
+          this.passwordconfirm = '';
           this.componentSwal.fire();
         },
         err => {
