@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NumericIdGuard } from '../guards/numeric-id.guard';
 import { UserResolver } from '../resolvers/user.resolver';
 import { ProfileComponent } from './profile/profile.component';
 import { UsereditComponent } from './useredit/useredit.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {
     path: ':id',
     component: ProfileComponent,
+    canActivate:[NumericIdGuard],
     resolve: {
       user: UserResolver
     }
