@@ -14,12 +14,12 @@ export class MatchEmailDirective implements Validator {
   }
 
 
-  validate(group: FormGroup): { [key: string]: any } | null {
-    if (group instanceof FormGroup) {
-      if (Object.values(group.value) && group.value.email !== group.value.email2) {
-        return { matchValue: true };
-      }
+  validate(group: FormGroup): ValidationErrors | null {
+
+    if (group.get('email')?.value && group.get('emailconfirm')?.value && group.get('email')?.value !== group.get('emailconfirm')?.value) {
+      return { matchValue: true };
     }
+
 
     return null;
   }
