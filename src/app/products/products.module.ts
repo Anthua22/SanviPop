@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaypalButtonModule } from '../paypal-button/paypal-button.module';
 import { PhotosproductComponent } from './photosproduct/photosproduct.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { MtokmPipe } from './pipes/mtokm.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     ProductCardComponent,
     ProductsFilterPipe,
     PhotosproductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MtokmPipe
   ],
   imports: [
 
