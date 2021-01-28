@@ -38,7 +38,7 @@ export class PhotosproductComponent implements OnInit {
         this.product.photos!.push(x);
         this.photo = '';
         this.photoFile='';
-      }
+      }, err=>console.error(err)
     )
   }
 
@@ -47,7 +47,7 @@ export class PhotosproductComponent implements OnInit {
       x=>{
         console.log(x)
         this.product.mainPhoto = x.mainPhoto
-      }
+      }, err=>console.error(err)
     );
   }
 

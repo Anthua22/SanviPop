@@ -26,17 +26,17 @@ export class ProfileComponent implements OnInit {
     if (this.user.me) {
       this.productService.getMyProducts().subscribe(x => this.myProducts = x,
         err => console.error(err));
-      this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x);
+      this.productService.getProductsMineSold().subscribe(x => this.productsSolds = x, err=>console.error(err));
       this.productService.getBookMarked().subscribe(x => {
         this.productsFavorites = x;
         this.productsFavorites = this.productsFavorites.filter(x=>x.status!=3)
-      });
-      this.productService.getMyProductsBought().subscribe(x => this.productsBought = x);
+      }, err=>console.error(err));
+      this.productService.getMyProductsBought().subscribe(x => this.productsBought = x, err=>console.error(err));
     } else {
       this.productService.getUserProducts(this.user.id!).subscribe(x => this.myProducts = x,
         err => console.error(err));
-      this.productService.getUserProductsSold(this.user.id!).subscribe(x => this.productsSolds = x);
-      this.productService.getUserProductsBought(this.user.id!).subscribe(x => this.productsBought = x);
+      this.productService.getUserProductsSold(this.user.id!).subscribe(x => this.productsSolds = x, err=>console.error(err));
+      this.productService.getUserProductsBought(this.user.id!).subscribe(x => this.productsBought = x, err=>console.error(err));
     }
   }
 

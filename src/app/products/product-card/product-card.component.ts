@@ -43,7 +43,7 @@ export class ProductCardComponent implements OnInit {
 
           }
         })
-      }
+      }, err=>console.error(err)
     )
 
   }

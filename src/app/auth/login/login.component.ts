@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       let token = usergoogle.getAuthResponse().id_token;
       this.authService.loginGoogle(token).subscribe(() => {
         this.router.navigate(['/products']);
-      })
+      }, err=>console.error(err))
     })
 
   }
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
     this.ngZone.run(() => {
       this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(() => {
         this.router.navigate(['/products']);
-      });
+      }, err=>console.error(err));
     })
 
 
