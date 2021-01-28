@@ -7,12 +7,11 @@
 <div class="container">
   <form
     action="#"
-    (ngSubmit)="register()"
     id="form-register"
     class="mt-4"
-    spMatchEmail
     role="form"
-    #prodForm="ngForm"
+    (ngSubmit)="register()"
+    [formGroup]="registerForm"
   >
     <legend>Create an account</legend>
 
@@ -22,108 +21,122 @@
         type="text"
         class="form-control"
         id="name"
-        name="nameUser"
-        placeholder="Name"
-        [(ngModel)]="newUser.name"
-        required
-        #nombreModel="ngModel"
         [ngClass]="{
-          'is-valid': nombreModel.touched && nombreModel.valid,
-          'is-invalid': nombreModel.touched && nombreModel.invalid
+          'is-invalid':
+            registerForm.get('name')?.touched &&
+            registerForm.get('name')?.invalid,
+          'is-valid': registerForm.get('name')?.valid
         }"
+        placeholder="Name"
+        formControlName="name"
       />
       <div
         class="invalid-feedback"
-        *ngIf="nombreModel.errors && nombreModel.errors.required"
+        *ngIf="
+          registerForm.get('name')?.errors &&
+          registerForm.get('name')?.errors?.required
+        "
       >
         Name is required
       </div>
     </div>
-    <div class="form-group">
-      <label for="correo">Email:</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        placeholder="Email"
-        [(ngModel)]="newUser.email"
-        required
-        #emailModel="ngModel"
-        [ngClass]="{
-          'is-valid': emailModel.touched && emailModel.valid,
-          'is-invalid': emailModel.touched && emailModel.invalid
-        }"
-      />
+    <div formGroupName="emailGroup">
+      <div class="form-group">
+        <label for="correo">Email:</label>
+        <input
+          type="email"
+          placeholder="Email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid':
+              registerForm.get('emailGroup')?.get('email')?.touched &&
+              registerForm.get('emailGroup')?.get('email')?.invalid,
+            'is-valid': registerForm.get('emailGroup')?.get('email')?.valid
+          }"
+        />
 
-      <div
-        class="invalid-feedback"
-        *ngIf="emailModel.errors && emailModel.errors.required"
-      >
-        Email is required
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            registerForm.get('emailGroup')?.get('email')?.errors &&
+            registerForm.get('emailGroup')?.get('email')?.errors?.required
+          "
+        >
+          Email is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="correo">Repeat Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email2"
+          placeholder="Reapeat Email"
+          formControlName="emailConfirm"
+          [ngClass]="{
+            'is-invalid':
+              registerForm.get('emailGroup')?.touched &&
+              registerForm.get('emailGroup')?.invalid,
+            'is-valid': registerForm.get('emailGroup')?.valid
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            registerForm.get('emailGroup')?.get('emailConfirm')?.errors &&
+            registerForm.get('emailGroup')?.get('emailConfirm')?.errors
+              ?.required
+          "
+        >
+          Email confirmation is required
+        </div>
+
+        <div
+          class="invalid-feedback"
+          *ngIf="registerForm.get('emailGroup')?.errors"
+        >
+          Emails doesn't match
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="correo">Repeat Email:</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email2"
-        name="emailconfirm"
-        placeholder="Email"
-        [(ngModel)]="repeatemail"
-        #emailRepeatModel="ngModel"
-        required
-        [ngClass]="{
-          'is-valid': emailRepeatModel.touched && emailRepeatModel.valid,
-          'is-invalid': emailRepeatModel.touched && emailRepeatModel.invalid
-        }"
-      />
-      <div
-        class="invalid-feedback"
-        *ngIf="emailRepeatModel.errors && emailRepeatModel.errors.required"
-      >
-        Email confirmation is required
-      </div>
 
-      <div
-        class="invalid-feedback"
-        *ngIf="prodForm.errors && prodForm.errors.matchValue"
-      >
-        Emails doesn't match
-      </div>
-    </div>
     <div class="form-group">
       <label for="password">Password:</label>
       <input
         type="password"
         class="form-control"
         id="password"
-        name="password"
         placeholder="Password"
-        required
-        [(ngModel)]="newUser.password"
-        minlength="4"
-        #passwordModel="ngModel"
+        formControlName="password"
         [ngClass]="{
-          'is-valid': passwordModel.touched && passwordModel.valid,
-          'is-invalid': passwordModel.touched && passwordModel.invalid
+          'is-invalid':
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.invalid,
+          'is-valid': registerForm.get('password')?.valid
         }"
       />
       <div
         class="invalid-feedback"
-        *ngIf="passwordModel.errors && passwordModel.errors.required"
+        *ngIf="
+          registerForm.get('password')?.errors &&
+          registerForm.get('password')?.errors?.required
+        "
       >
         Password is required
       </div>
       <div
         class="invalid-feedback"
-        *ngIf="passwordModel.errors && passwordModel.errors.minlength"
+        *ngIf="
+          registerForm.get('password')?.errors &&
+          registerForm.get('password')?.errors?.minlength
+        "
       >
         Add at least
         {{
-          passwordModel.errors.minlength.requiredLength -
-            passwordModel.errors.minlength.actualLength
+          registerForm.get("password")?.errors?.minlength.requiredLength -
+            registerForm.get("password")?.errors?.minlength.actualLength
         }}
         characters
       </div>
@@ -135,10 +148,13 @@
           type="text"
           class="form-control"
           id="lat"
-          name="lat"
-          [(ngModel)]="newUser.lat"
           placeholder="Geolocating..."
           readonly
+          formControlName="latitude"
+          [ngClass]="{
+            'is-invalid': registerForm.get('latitude')?.invalid,
+            'is-valid': registerForm.get('latitude')?.valid
+          }"
         />
       </div>
       <div class="form-group col">
@@ -147,10 +163,13 @@
           type="text"
           class="form-control"
           id="lng"
-          name="lng"
-          [(ngModel)]="newUser.lng"
           placeholder="Geolocating..."
           readonly
+          formControlName="longitude"
+          [ngClass]="{
+            'is-invalid': registerForm.get('longitude')?.invalid,
+            'is-valid': registerForm.get('longitude')?.valid
+          }"
         />
       </div>
     </div>
@@ -160,15 +179,15 @@
         type="file"
         class="form-control"
         id="avatar"
-        name="avatar"
         required
         #fileImage
+        formControlName="avatar"
         (change)="changeImage(fileImage)"
-        [(ngModel)]="photoFile"
-        #photoModel="ngModel"
         [ngClass]="{
-          'is-valid': photoModel.touched && photoModel.valid,
-          'is-invalid': photoModel.touched && photoModel.invalid
+          'is-invalid':
+            registerForm.get('avatar')?.touched &&
+            registerForm.get('avatar')?.invalid,
+          'is-valid': registerForm.get('avatar')?.valid
         }"
       />
 
@@ -179,7 +198,11 @@
     <a class="btn btn-secondary" [routerLink]="['/auth/login']" role="button"
       >Go back</a
     >
-    <button type="submit" class="btn btn-primary" [disabled]="prodForm.invalid">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registerForm.invalid"
+    >
       Create account
     </button>
   </form>

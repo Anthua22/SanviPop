@@ -18,11 +18,11 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 export class LoginComponent implements OnInit {
 
   user!: User;
-  message:string='';
+  message: string = '';
   @ViewChild('errorSwal')
   public readonly errorSwal!: SwalComponent;
 
-  constructor(private geolocation: GeolocalitationService, library: FaIconLibrary, public readonly swalTargets:SwalPortalTargets,private ngZone: NgZone, private router: Router, private authService: AuthService) {
+  constructor(private geolocation: GeolocalitationService, library: FaIconLibrary, public readonly swalTargets: SwalPortalTargets, private ngZone: NgZone, private router: Router, private authService: AuthService) {
     library.addIcons(faGoogle);
     library.addIcons(faFacebook);
 
@@ -52,9 +52,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.user).subscribe(
       () => {
-      this.router.navigate(['/products']);
+        this.router.navigate(['/products']);
       },
-      err=> {
+      err => {
         this.message = err;
         this.errorSwal.fire();
       }
@@ -76,10 +76,12 @@ export class LoginComponent implements OnInit {
 
   loggedFacebook(resp: fb.StatusResponse) {
     // Send this to your server
+    this.ngZone.run(() => {
+      this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(() => {
+        this.router.navigate(['/products']);
+      });
+    })
 
-    this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(() => {
-      this.router.navigate(['/products']);
-    });
 
   }
   showError(error: any) {
