@@ -2,7 +2,6 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaypalButtonComponent } from './paypal-button/paypal-button.component';
 import { PaypalConfig, PAYPAL_CONFIG } from './paypal-button.config';
-import { PaypalLoadService } from './services/paypal-load.service';
 
 
 

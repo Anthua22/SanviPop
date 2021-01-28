@@ -1,4 +1,4 @@
-import { Component, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
@@ -8,8 +8,6 @@ import { GeolocalitationService } from '../services/geolocalitation.service';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { ResponseError, ResponseErrorLogin } from '../interfaces/responses';
-import { HttpErrorResponse } from '@angular/common/http';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -24,7 +22,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('errorSwal')
   public readonly errorSwal!: SwalComponent;
 
-  constructor(private geolocation: GeolocalitationService, private library: FaIconLibrary, public readonly swalTargets:SwalPortalTargets,private ngZone: NgZone, private router: Router, private authService: AuthService) {
+  constructor(private geolocation: GeolocalitationService, library: FaIconLibrary, public readonly swalTargets:SwalPortalTargets,private ngZone: NgZone, private router: Router, private authService: AuthService) {
     library.addIcons(faGoogle);
     library.addIcons(faFacebook);
 
@@ -53,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.user).subscribe(
-      x => {
+      () => {
       this.router.navigate(['/products']);
       },
       err=> {
@@ -67,7 +65,7 @@ export class LoginComponent implements OnInit {
   loggedGoogle(usergoogle: gapi.auth2.GoogleUser) {
     this.ngZone.run(() => {
       let token = usergoogle.getAuthResponse().id_token;
-      this.authService.loginGoogle(token).subscribe(x => {
+      this.authService.loginGoogle(token).subscribe(() => {
         this.router.navigate(['/products']);
       })
     })
@@ -79,7 +77,7 @@ export class LoginComponent implements OnInit {
   loggedFacebook(resp: fb.StatusResponse) {
     // Send this to your server
 
-    this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(x => {
+    this.authService.loginFacebook(resp.authResponse.accessToken).subscribe(() => {
       this.router.navigate(['/products']);
     });
 

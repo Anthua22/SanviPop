@@ -1,10 +1,8 @@
-import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/products/interfaces/product';
 import { ProductsService } from 'src/app/products/services/products.service';
 import { User } from '../interfaces/user';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'sp-profile',

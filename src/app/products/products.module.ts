@@ -13,7 +13,6 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaypalButtonModule } from '../paypal-button/paypal-button.module';
-import { PaypalButtonComponent } from '../paypal-button/paypal-button/paypal-button.component';
 import { PhotosproductComponent } from './photosproduct/photosproduct.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 

@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { User } from 'src/app/users/interfaces/user';
 import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
 import * as moment from 'moment';
-import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'sp-product-card',

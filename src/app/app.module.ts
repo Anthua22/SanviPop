@@ -16,7 +16,6 @@ import { FacebookLoginModule } from './facebook-login/facebook-login.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PaypalButtonModule } from './paypal-button/paypal-button.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

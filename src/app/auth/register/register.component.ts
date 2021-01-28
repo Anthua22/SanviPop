@@ -1,6 +1,5 @@
 
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { User } from 'src/app/users/interfaces/user';
