@@ -95,7 +95,7 @@ export class ProductsService {
   }
 
   updateMainPhoto(idProduct:number, idPhoto:number):Observable<Product>{
-    return this.http.put<ProductResponse>(`products/${idProduct}`,{maintPhoto:idPhoto}).pipe(
+    return this.http.put<ProductResponse>(`products/${idProduct}`,{mainPhoto:idPhoto}).pipe(
       map(x=>x.product)
     );
   }
