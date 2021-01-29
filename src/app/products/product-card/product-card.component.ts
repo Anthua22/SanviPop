@@ -5,6 +5,7 @@ import { Product } from '../interfaces/product';
 import { ProductsService } from '../services/products.service';
 import * as moment from 'moment';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+import { UserService } from 'src/app/users/services/user.service';
 
 @Component({
   selector: 'sp-product-card',
@@ -25,8 +26,9 @@ export class ProductCardComponent implements OnInit {
 
 
   owner!: User;
+  soldTo!:User;
 
-  constructor(private productsService: ProductsService, public readonly swalTargets: SwalPortalTargets) { }
+  constructor(private productsService: ProductsService, private userService:UserService,public readonly swalTargets: SwalPortalTargets) { }
 
 
   ngOnInit(): void {
@@ -34,17 +36,9 @@ export class ProductCardComponent implements OnInit {
     this.product.datePublished = moment(this.product.datePublished).startOf('hour').fromNow();
     this.owner = this.product.owner!;
     this.idbutton = this.product.title + this.product.id;
-    this.productsService.getBookMarked().subscribe(
-      x => {
-        this.productsFavorite = x;
-        this.productsFavorite.forEach(x => {
-          if (x.id === this.product.id) {
-            this.product.favorite = true;
-
-          }
-        })
-      }, err=>console.error(err)
-    )
+    if(this.product.soldTo){
+      this.userService.getProfile(this.product.soldTo.id).subscribe(x=>this.soldTo = x);
+    }
 
   }
 

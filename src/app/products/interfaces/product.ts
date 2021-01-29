@@ -1,6 +1,7 @@
 import { User } from 'src/app/users/interfaces/user';
 import { Category } from './category';
 import { Photo } from './photo';
+import { SoldTo } from './sold';
 
 
 
@@ -18,7 +19,8 @@ interface ProductBase {
   datePublished?: string;
   distance?: number;
   status?:number;
-  favorite?:boolean,
+  bookmarked?:boolean
+  soldTo?:SoldTo
 
 }
 

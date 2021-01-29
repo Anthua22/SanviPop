@@ -17,8 +17,8 @@
       class="col-2 btn btn-lg fav"
     >
       <div #start>
-        <i class="far fa-heart" *ngIf="!product.favorite"></i>
-        <i class="fas fa-heart" *ngIf="product.favorite"></i>
+        <i class="far fa-heart" *ngIf="!product.bookmarked"></i>
+        <i class="fas fa-heart" *ngIf="product.bookmarked"></i>
       </div>
     </button>
   </div>
@@ -82,6 +82,14 @@
       <div class="text-right text-muted">
         <small>{{ product.distance }} <i>km</i></small>
       </div>
+    </div>
+  </div>
+  <div *ngIf="soldTo" class="row mt-2">
+    <div class="col-6 text-center">Sold to:</div>
+    <div class="col-6">
+      <a [routerLink]="['/users', soldTo.id]">
+        {{ soldTo.name }}
+      </a>
     </div>
   </div>
 </div>
