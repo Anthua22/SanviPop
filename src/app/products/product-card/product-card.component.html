@@ -84,7 +84,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="soldTo" class="row mt-2">
+  <div *ngIf="soldTo && product.mine" class="row mt-2">
     <div class="col-6 text-center">Sold to:</div>
     <div class="col-6">
       <a [routerLink]="['/users', soldTo.id]">
